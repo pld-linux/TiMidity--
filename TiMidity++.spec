@@ -207,15 +207,23 @@ xskinmidi - interfejs do TiMidity++ "X Skin".
 
 %package alsaseq
 Summary:	TiMidity++ ALSA sequencer interface
-Summary(pl):	TiMidity++ jako interfejs sekwencera ALSA 
+Summary(pl):	TiMidity++ jako interfejs sekwencera ALSA
 Group:		Applications/Sound
 Requires:	%{name} = %{version}-%{release}
 
 %description alsaseq
-The ALSA sequencer interface communicates between ALSA sequencer core and
-timidity.  The interface receives events from sequencer and plays it in
-(quasi-)real-time.  On this mode, TiMidity works purely as the software
-real-time MIDI render, that is as a software MIDI synth engine on ALSA.
+The ALSA sequencer interface communicates between ALSA sequencer core
+and timidity. The interface receives events from sequencer and plays
+it in (quasi-)real-time. In this mode, TiMidity works purely as the
+software real-time MIDI render, that is as a software MIDI synth
+engine on ALSA.
+
+%description alsaseq -l pl
+Interfejs sekwencera ALSA komunikuje siê miêdzy rdzeniem sekwencera
+ALSA a timidity. Interfejs odbiera zdarzenia od sekwencera od odtwarza
+je w czasie (prawie) rzeczywistym. W tym trybie TiMidity dzia³a
+wy³±cznie jako programowy odtwarzacz MIDI czasu rzeczywistego, czyli
+jako silnik syntezatora MIDI w architekturze ALSA.
 
 %prep
 %setup -q
