@@ -115,8 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_datadir}/GUSpatches}
 install timidity.cfg $RPM_BUILD_ROOT%{_sysconfdir}
 
-strip --strip-unneeded $RPM_BUILD_ROOT%{_bindir}/* \
-	$RPM_BUILD_ROOT%{_libdir}/timidity/*.so || :
+%{!?debug: strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/timidity/*.so || : }
 
 ## based on timidity/timidity.c
 ##ln -s timidity $RPM_BUILD_ROOT%{_bindir}/kmidi # does it work?
@@ -141,7 +140,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/timidity/interface_i.so
 %{_libdir}/timidity/bitmaps
 %{_mandir}/man*/*
-%config %{_sysconfdir}/timidity.cfg
+%config(noreplace) %{_sysconfdir}/timidity.cfg
 %ghost %dir %{_datadir}/GUSpatches
 
 %files slang
