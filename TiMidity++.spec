@@ -8,16 +8,13 @@ Summary(pt_BR):	Sintetizador MIDI por software
 Summary(ru):	“œ…«“Ÿ◊¡‘≈Ãÿ MIDI ∆¡ Ãœ◊ … ÀœŒ◊≈“‘œ“ …» ◊ WAV ∆œ“Õ¡‘
 Summary(uk):	“œ«“¡◊¡ﬁ MIDI-∆¡ Ã¶◊ ‘¡ ÀœŒ◊≈“‘œ“ ß» ◊ WAV ∆œ“Õ¡‘
 Name:		TiMidity++
-%define		_ver		2.12.0
-%define		_pre		pre1
-Version:	%{_ver}%{_pre}
-Release:	4
+Version:	2.13.0
+Release:	1
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
-#Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.bz2
-Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{_ver}-%{_pre}.tar.bz2
-# Source0-md5:	6a878bc9341812d6a0b9a7a7d38c368c
+Source0:	http://dl.sourceforge.net/timidity/%{name}-%{version}.tar.bz2
+# Source0-md5:	63284981e1ac81fce2b53cc4b1f4c468
 Source1:	http://archive.cs.umbc.edu/pub/midia/instruments.tar.gz
 # Source1-md5:	4959787a78ee39d44a36185bd303cf20
 Source2:	britepno.pat.bz2
@@ -26,7 +23,7 @@ Source3:	pistol.pat.bz2
 # Source3-md5:	f961325db679de6e0ea402ebe6a268f9
 Source4:	timidity.cfg
 Patch0:		%{name}-config.patch
-URL:		http://www.goice.co.jp/member/mo/timidity/
+URL:		http://timidity.sourceforge.net/
 %{?with_alsa:BuildRequires:	alsa-lib-devel}
 BuildRequires:	autoconf
 BuildRequires:	gtk+-devel
@@ -91,18 +88,6 @@ Directory where TiMidity++ instruments should be placed in.
 %description gspdir -l pl
 Katalog, w ktÛrym powinny byÊ instalowane instrumenty dla TiMidity++.
 
-%package gtk
-Summary:	GTK+ interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ oparty o bibliotekÍ gtk+
-Group:		Applications/Sound
-Requires:	%{name} = %{version}-%{release}
-
-%description gtk
-gtkmidi - GTK+ interface for TiMidity++.
-
-%description gtk -l pl
-gtkmidi - interfejs do TiMidity++ oparty o bibliotekÍ gtk+.
-
 %package instruments
 Summary:	Instruments for TiMidity++
 Summary(pl):	Instrumenty dla TiMidity++
@@ -120,6 +105,18 @@ Instrumenty dla TiMidity++.
 %description instruments -l pt_BR
 Este pacote inclui um conjunto b·sico de instrumentos (chamados de
 patches no meio musical) para o TiMidity++.
+
+%package gtk
+Summary:	GTK+ interface for TiMidity++
+Summary(pl):	Interfejs TiMidity++ oparty o bibliotekÍ gtk+
+Group:		Applications/Sound
+Requires:	%{name} = %{version}-%{release}
+
+%description gtk
+gtkmidi - GTK+ interface for TiMidity++.
+
+%description gtk -l pl
+gtkmidi - interfejs do TiMidity++ oparty o bibliotekÍ gtk+.
 
 %package motif
 Summary:	Motif interface for TiMidity++
@@ -182,8 +179,12 @@ xawmidi - Athena interface for TiMidity++.
 xawmidi - interfejs do TiMidity++ oparty o biblitekÍ widgetÛw Athena.
 
 %prep
-%setup -q -n %{name}-%{_ver}-%{_pre}
+%setup -q
 %patch0 -p1
+
+for f in doc/ja_JP.eucJP/README*; do
+	mv -f $f ${f}.ja
+done
 
 %build
 cp -f /usr/share/automake/config.sub .
@@ -204,7 +205,7 @@ cp -f /usr/share/automake/config.sub .
 	--enable-server \
 	--enable-spectrogram \
 	--enable-audio=default,oss,%{?with_alsa:alsa,}esd \
-	%{?with_alsa:--enable-alsaseq} \
+	%{?with_alsa:--enable-alsaseq=dynamic} \
 	--enable-default-output=default
 
 %{__make}
@@ -224,6 +225,10 @@ ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xmmidi
 ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xawmidi
 ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xskinmidi
 
+install -d $RPM_BUILD_ROOT%{_mandir}/ja/man{1,5}
+install doc/ja_JP.eucJP/timidity.1 $RPM_BUILD_ROOT%{_mandir}/ja/man1
+install doc/ja_JP.eucJP/timidity.cfg.5 $RPM_BUILD_ROOT%{_mandir}/ja/man5
+
 install %{SOURCE4} $RPM_BUILD_ROOT%{_sysconfdir}
 
 cd $RPM_BUILD_ROOT%{_datadir}/GUSpatches
@@ -238,52 +243,77 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc A* Ch* N* R* TO* doc/C/{C*,F*,README.[!tx]*,README.xs*}
-%config(noreplace) %{_sysconfdir}/timidity.cfg
+%doc AUTHORS ChangeLog* NEWS README TODO doc/C/{CHANGES*,FAQ,README.[!tx]*}
+%lang(ja) %doc README.ja doc/ja_JP.eucJP/README.[!tx]*.ja
 %attr(755,root,root) %{_bindir}/timidity
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/timidity.cfg
 %dir %{_libdir}/timidity
-%attr(755,root,root) %{_libdir}/timidity/interface_n.so
 %attr(755,root,root) %{_libdir}/timidity/interface_e.so
-%attr(755,root,root) %{_libdir}/timidity/interface_i.so
+%attr(755,root,root) %{_libdir}/timidity/interface_n.so
+%{_libdir}/timidity/interface_e.txt
+%{_libdir}/timidity/interface_n.txt
 %{_libdir}/timidity/bitmaps
-%{_mandir}/man*/*
+%{_mandir}/man1/timidity.1*
+%{_mandir}/man5/timidity.cfg.5*
+%lang(ja) %{_mandir}/ja/man1/timidity.1*
+%lang(ja) %{_mandir}/ja/man5/timidity.cfg.5*
+%if %{with alsa}
+# could be separated, but audio modules are always compiled in,
+# so timidity is linked with alsa-lib anyway
+%attr(755,root,root) %{_libdir}/timidity/interface_A.so
+%{_libdir}/timidity/interface_A.txt
+%endif
+# xskin interface could be separated to, but timidity depends on X anyway
+%doc doc/C/README.xskin
+%lang(ja) %doc doc/ja_JP.eucJP/README.xskin.ja
+%attr(755,root,root) %{_bindir}/xskinmidi
+%attr(755,root,root) %{_libdir}/timidity/interface_i.so
+%{_libdir}/timidity/interface_i.txt
 
 %files gspdir
 %defattr(644,root,root,755)
 %dir %{_datadir}/GUSpatches
 
-%files gtk
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/timidity/interface_g.so
-%attr(755,root,root) %{_bindir}/gtkmidi
-
 %files instruments
 %defattr(644,root,root,755)
 %{_datadir}/GUSpatches/*
 
+%files gtk
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/gtkmidi
+%attr(755,root,root) %{_libdir}/timidity/interface_g.so
+%{_libdir}/timidity/interface_g.txt
+
 %files motif
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/timidity/interface_m.so
 %attr(755,root,root) %{_bindir}/xmmidi
+%attr(755,root,root) %{_libdir}/timidity/interface_m.so
+%{_libdir}/timidity/interface_m.txt
 
 %files slang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/timidity/interface_s.so
+%{_libdir}/timidity/interface_s.txt
 
 %files tcltk
 %defattr(644,root,root,755)
 %doc doc/C/README.tk
+%lang(ja) %doc doc/ja_JP.eucJP/README.tk.ja
+%attr(755,root,root) %{_bindir}/tkmidi
 %attr(755,root,root) %{_libdir}/timidity/interface_k.so
+%{_libdir}/timidity/interface_k.txt
 %{_libdir}/timidity/tclIndex
 %{_libdir}/timidity/*.tcl
-%attr(755,root,root) %{_bindir}/tkmidi
 
 %files vt100
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/timidity/interface_T.so
+%{_libdir}/timidity/interface_T.txt
 
 %files xaw
 %defattr(644,root,root,755)
 %doc doc/C/README.xaw
-%attr(755,root,root) %{_libdir}/timidity/interface_a.so
+%lang(ja) %doc doc/ja_JP.eucJP/README.xaw.ja
 %attr(755,root,root) %{_bindir}/xawmidi
+%attr(755,root,root) %{_libdir}/timidity/interface_a.so
+%{_libdir}/timidity/interface_a.txt
