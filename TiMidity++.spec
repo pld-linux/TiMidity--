@@ -25,7 +25,7 @@ Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
 #Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.bz2
 #Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{_ver}-%{_pre}.tar.bz2
-Source0:	http://www.kernel.pl/~adgor/pld/%{_pkgname}-%{_snap}.tar.bz2
+Source0:	http://ep09.pld-linux.org/~adgor/pld/%{_pkgname}-%{_snap}.tar.bz2
 # Source0-md5:	29695ccdb64247ef48f41cb279f00e76
 Source1:	instruments.tar.gz
 # Source1-md5:	4959787a78ee39d44a36185bd303cf20
