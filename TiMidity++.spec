@@ -5,14 +5,16 @@
 Summary:	TiMidity++ - MIDI to WAV converter and player
 Summary(pl):	TiMidity++ - konwerter do WAV oraz odtwarzacz plików MIDI
 Name:		TiMidity++
-Version:	2.10.4
-Release:	5
+Version:	2.11.3
+Release:	1
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
 Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.bz2
 Source1:	http://archive.cs.umbc.edu/pub/midia/instruments.tar.gz
-Source2:	timidity.cfg
+Source2:	britepno.pat.bz2
+Source3:	pistol.pat.bz2
+Source4:	timidity.cfg
 Patch0:		%{name}-config.patch
 URL:		http://www.goice.co.jp/member/mo/timidity/
 %ifnarch sparc sparc64
@@ -179,12 +181,14 @@ ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xmmidi
 ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xawmidi
 ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xskinmidi
 
-install %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}
+install %{SOURCE4} $RPM_BUILD_ROOT/%{_sysconfdir}
 
 (cd $RPM_BUILD_ROOT%{_datadir}/GUSpatches
 tar xzf %{SOURCE1}
 mv -f instruments/* .
 rmdir instruments
+bzip2 -cd %{SOURCE2} > britepno.pat
+bzip2 -cd %{SOURCE3} > pistol.pat
 )
 
 gzip -9nf AUTHORS README* ChangeLog* NEWS doc/C/{CHANGES*,FAQ,README*}
