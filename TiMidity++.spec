@@ -8,7 +8,7 @@ Vendor:		Masanao Izumo <mo@goice.co.jp>
 Icon:		-
 Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.bz2
 URL:		http://www.goice.co.jp/member/mo/timidity/
-BuildRoot:   	/tmp/%{name}-%{version}-root
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 TiMidity++ is a converter that converts some of MIDI files ( formats :
