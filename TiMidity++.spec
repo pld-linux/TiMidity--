@@ -13,6 +13,8 @@ Group:		Applications/Sound
 Group(de):	Applikationen/Laut
 Group(pl):	Aplikacje/D¼wiêk
 Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.bz2
+Source1:	http://archive.cs.umbc.edu/pub/midia/instruments.tar.bz2
+Source2:	timidity.cfg
 Patch0:		%{name}-config.patch
 %ifnarch sparc sparc64
 %{!?_without_alsa:BuildRequires:	alsa-lib-devel}
@@ -132,6 +134,20 @@ VT100 interface for TiMidity++.
 %description vt100 -l pl
 Interfejs do TiMidity++ mog±cy dzia³aæ na terminalu VT100.
 
+%package instruments
+Summary:	instruments for TiMidity++
+Summary(pl):	instrumenty dla TiMidity++
+Group:		Applications/Sound
+Group(de):	Applikationen/Laut
+Group(pl):	Aplikacje/D¼wiêk
+Requires:	%{name}
+
+%description instruments
+instruments for TiMidity++.
+
+%description instruments -l pl
+instrumenty dla TiMidity++
+
 %prep
 %setup -q
 %patch0 -p1
@@ -139,9 +155,6 @@ Interfejs do TiMidity++ mog±cy dzia³aæ na terminalu VT100.
 %build
 %configure \
 	--with-elf \
-%ifnarch sparc sparc64
-	%{!?_without_alsa:--enable-alsa} \
-%endif
 	--enable-dynamic \
 	--enable-ncurses=dynamic \
 	--enable-slang=dynamic \
@@ -154,7 +167,15 @@ Interfejs do TiMidity++ mog±cy dzia³aæ na terminalu VT100.
 	--enable-vt100=dynamic \
 	--enable-network \
 	--enable-server \
-	--enable-spectrogram
+	--enable-spectrogram \
+%ifnarch sparc sparc64
+	--enable-audio=default,oss,%{!?_without_alsa:alsa,}esd \
+	%{!?_without_alsa:--enable-alsaseq} \
+%else
+	--enable-audio=default,oss,esd \
+%endif
+	--enable-default-output=default
+	
 %{__make}
 
 %install
@@ -162,8 +183,6 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_datadir}/GUSpatches}
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
-
-install timidity.cfg $RPM_BUILD_ROOT%{_sysconfdir}
 
 ## based on timidity/timidity.c
 ##ln -s timidity $RPM_BUILD_ROOT%{_bindir}/kmidi # does it work?
@@ -173,6 +192,10 @@ ln -s timidity $RPM_BUILD_ROOT%{_bindir}/xmmidi
 ln -s timidity $RPM_BUILD_ROOT%{_bindir}/xawmidi
 ln -s timidity $RPM_BUILD_ROOT%{_bindir}/xskinmidi
 
+install %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}
+
+(cd $RPM_BUILD_ROOT%{_datadir}/GUSpatches ;tar xvjf %{SOURCE1})
+
 gzip -9nf AUTHORS README* ChangeLog* NEWS doc/C/{CHANGES*,FAQ,README*}
 
 %clean
@@ -180,7 +203,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz ,doc/C/*.gz
+%doc *.gz doc/C/*.gz
 %attr(755,root,root) %{_bindir}/timidity
 %dir %{_libdir}/timidity
 %attr(755,root,root) %{_libdir}/timidity/interface_n.so
@@ -221,3 +244,7 @@ rm -rf $RPM_BUILD_ROOT
 %files vt100
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/timidity/interface_T.so
+
+%files instruments
+%defattr(644,root,root,755)
+%{_datadir}/GUSpatches/*
