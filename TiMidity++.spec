@@ -42,7 +42,7 @@ Group(pl):	Aplikacje/D德i瘯
 Requires:	%{name} = %{version}
 
 %description motif
-Motif interface for TiMidity++.
+xmmidi -- Motif interface for TiMidity++.
 
 %package tcltk
 Summary:	Tcl/Tk interface for TiMidity++.
@@ -51,7 +51,7 @@ Group(pl):	Aplikacje/D德i瘯
 Requires:	%{name} = %{version}
 
 %description tcltk
-Tcl/Tk interface for TiMidity++.
+tkmidi -- Tcl/Tk interface for TiMidity++.
 
 %package xaw
 Summary:	Athena interface for TiMidity++.
@@ -60,7 +60,7 @@ Group(pl):	Aplikacje/D德i瘯
 Requires:	%{name} = %{version}
 
 %description xaw
-Athena interface for TiMidity++.
+xawmidi -- Athena interface for TiMidity++.
 
 %package gtk
 Summary:	GTK+ interface for TiMidity++.
@@ -69,7 +69,7 @@ Group(pl):	Aplikacje/D德i瘯
 Requires:	%{name} = %{version}
 
 %description gtk
-GTK+ interface for TiMidity++.
+gtkmidi -- GTK+ interface for TiMidity++.
 
 %package vt100
 Summary:	VT100 interface for TiMidity++.
@@ -118,6 +118,14 @@ install timidity.cfg $RPM_BUILD_ROOT%{_sysconfdir}
 strip --strip-unneeded $RPM_BUILD_ROOT%{_bindir}/* \
 	$RPM_BUILD_ROOT%{_libdir}/timidity/*.so || :
 
+## based on timidity/timidity.c
+##ln -s timidity $RPM_BUILD_ROOT%{_bindir}/kmidi # does it work?
+ln -s timidity $RPM_BUILD_ROOT%{_bindir}/gtkmidi
+ln -s timidity $RPM_BUILD_ROOT%{_bindir}/tkmidi
+ln -s timidity $RPM_BUILD_ROOT%{_bindir}/xmmidi
+ln -s timidity $RPM_BUILD_ROOT%{_bindir}/xawmidi
+ln -s timidity $RPM_BUILD_ROOT%{_bindir}/xskinmidi
+
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	AUTHORS README* ChangeLog* NEWS doc/C/{CHANGES*,FAQ,README*}
 
@@ -143,21 +151,25 @@ rm -rf $RPM_BUILD_ROOT
 %files motif
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/timidity/interface_m.so
+%attr(755,root,root) %{_bindir}/xmmidi
 
 %files tcltk
 %defattr(644,root,root,755)
 %doc doc/C/README.tk.gz
 %attr(755,root,root) %{_libdir}/timidity/interface_k.so
 %{_libdir}/timidity/*.tcl
+%attr(755,root,root) %{_bindir}/tkmidi
 
 %files xaw
 %defattr(644,root,root,755)
 %doc doc/C/README.xaw.gz
 %attr(755,root,root) %{_libdir}/timidity/interface_a.so
+%attr(755,root,root) %{_bindir}/xawmidi
 
 %files gtk
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/timidity/interface_g.so
+%attr(755,root,root) %{_bindir}/gtkmidi
 
 %files vt100
 %defattr(644,root,root,755)
