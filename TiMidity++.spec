@@ -41,6 +41,7 @@ BuildRequires:	ncurses-devel
 BuildRequires:	slang-devel
 %{?with_X:BuildRequires:	tk-devel >= 8.3.2}
 %{?with_vorbis:BuildRequires:	libvorbis-devel}
+%{?with_X:Provides:	%{name}(X) = %{version}-%{releaase}}
 Obsoletes:	timidity
 Obsoletes:	timidity++
 Obsoletes:	timidity++-X11
@@ -120,7 +121,7 @@ patches no meio musical) para o TiMidity++.
 Summary:	GTK+ interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ oparty o bibliotekê gtk+
 Group:		Applications/Sound
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}(X) = %{version}-%{release}
 
 %description gtk
 gtkmidi - GTK+ interface for TiMidity++.
@@ -132,7 +133,7 @@ gtkmidi - interfejs do TiMidity++ oparty o bibliotekê gtk+.
 Summary:	Motif interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ oparty o Motif
 Group:		Applications/Sound
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}(X) = %{version}-%{release}
 
 %description motif
 xmmidi - Motif interface for TiMidity++.
@@ -156,7 +157,7 @@ Interfejs do TiMidity++ oparty o bibliotekê Slang.
 Summary:	Tcl/Tk interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ oparty o Tcl/Tk
 Group:		Applications/Sound
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}(X) = %{version}-%{release}
 
 %description tcltk
 tkmidi - Tcl/Tk interface for TiMidity++.
@@ -180,7 +181,7 @@ Interfejs do TiMidity++ mog±cy dzia³aæ na terminalu VT100.
 Summary:	Athena interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ oparty o Athena Widgets
 Group:		Applications/Sound
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}(X) = %{version}-%{release}
 
 %description xaw
 xawmidi - Athena interface for TiMidity++.
@@ -189,17 +190,17 @@ xawmidi - Athena interface for TiMidity++.
 xawmidi - interfejs do TiMidity++ oparty o biblitekê widgetów Athena.
 
 %package xskin
-Summary:	X skin interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ "X skin" 
+Summary:	"X Skin" interface for TiMidity++
+Summary(pl):	Interfejs TiMidity++ "X Skin" 
 Group:		Applications/Sound
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}(X) = %{version}-%{release}
 Obsoletes:	TiMidity++ < 2.13.0-3
 
 %description xskin
-xskinmidi - X skin interface for TiMidity++.
+xskinmidi - "X Skin" interface for TiMidity++.
 
 %description xskin -l pl
-xskinmidi - interfejs do TiMidity++ "X skin"
+xskinmidi - interfejs do TiMidity++ "X Skin".
 
 %prep
 %setup -q
@@ -279,7 +280,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/timidity/interface_n.so
 %{_libdir}/timidity/interface_e.txt
 %{_libdir}/timidity/interface_n.txt
-# TODO (only tcl iface uses it?)
 %{?with_X:%{_libdir}/timidity/bitmaps}
 %{_mandir}/man1/timidity.1*
 %{_mandir}/man5/timidity.cfg.5*
