@@ -42,13 +42,13 @@ time playing, TiMidity if able to show the lyric contained in KAR file
 or WRD file.
 
 %description -l pl
-TiMidity++ jest konwerterem z niektórych plików MIDI (formaty: Standard
-MIDI (MID), Recomposer (RCP, R36, G18, G36), Module (mod)) do plików
-audio (np. RIFF WAVE).
-Do generowania danych z plików MIDI TiMidity u¿ywa patchy takich jak
-Gravis Ultrasound albo Soundfontów (sfx, sf2). Cyfrowe dane audio mog±
-byæ zapisane do pliku albo odtwarzane w czasie rzeczywistym. Przy
-odtwarzaniu TiMidity mo¿e pokazywaæ s³owa zawarte w pliku KAR lub WRD.
+TiMidity++ jest konwerterem z niektórych plików MIDI (formaty:
+Standard MIDI (MID), Recomposer (RCP, R36, G18, G36), Module (mod)) do
+plików audio (np. RIFF WAVE). Do generowania danych z plików MIDI
+TiMidity u¿ywa patchy takich jak Gravis Ultrasound albo Soundfontów
+(sfx, sf2). Cyfrowe dane audio mog± byæ zapisane do pliku albo
+odtwarzane w czasie rzeczywistym. Przy odtwarzaniu TiMidity mo¿e
+pokazywaæ s³owa zawarte w pliku KAR lub WRD.
 
 %package slang
 Summary:	Slang interface for TiMidity++
