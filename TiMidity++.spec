@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	X	# without Xaw & xskin (implies libX11 deps)
+%bcond_without	X	# without X based interfaces (implies libX11 deps)
 %bcond_without	alsa	# without ALSA support
 %bcond_with	arts	# enable ARTS support (implies also glib(2) deps)
 %bcond_with	esd	# enable ESD support
