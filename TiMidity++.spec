@@ -5,6 +5,8 @@
 Summary:	TiMidity++ - MIDI to WAV converter and player
 Summary(pl):	TiMidity++ - konwerter do WAV oraz odtwarzacz plikСw MIDI
 Summary(pt_BR):	Sintetizador MIDI por software.
+Summary(ru):	Проигрыватель MIDI файлов и конвертор их в WAV формат
+Summary(uk):	Програвач MIDI-файл╕в та конвертор ╖х в WAV формат
 Name:		TiMidity++
 Version:	2.11.3
 Release:	1
@@ -58,6 +60,20 @@ ouvir arquivos do tipo MIDI com a mesma qualidade de som que as placas
 que utilizam o recurso de "wavetable" via hardware (como a AWE32),
 mesmo que esta nЦo possua o recurso de "wavetable" (a SB16 por
 exemplo).
+
+%description -l ru
+Проигрыватель MIDI файлов, не требующий поддержки инструментов MIDI
+звуковой платой. Использует файлы инструментов в формате GUS/patch,
+может также использовать данные в формате SoundFont.
+Обеспечивает отличное качество звука MIDI за счет интенсивного
+использования процессора.
+
+%description -l uk
+Програвач MIDI файл╕в, якому не потр╕бна п╕дтримка ╕нструмент╕в MIDI
+звуковою платою. Використову╓ файли ╕нструмент╕в у формат╕ GUS/patch,
+розум╕╓ також формат SoundFont.
+Забезпечу╓ в╕дм╕нну як╕сть звуку MIDI за рахунок ╕нтенсивного
+використання процесора.
 
 %package slang
 Summary:	Slang interface for TiMidity++
