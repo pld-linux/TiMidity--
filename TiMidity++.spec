@@ -100,14 +100,14 @@ Group:		Applications/Sound
 Requires:	%{name} = %{version}
 
 %description gtk
-gtkmidi -- GTK+ interface for TiMidity++.
+gtkmidi - GTK+ interface for TiMidity++.
 
 %description gtk -l pl
 gtkmidi - interfejs do TiMidity++ oparty o bibliotekê gtk+.
 
 %package instruments
-Summary:	instruments for TiMidity++
-Summary(pl):	instrumenty dla TiMidity++
+Summary:	Instruments for TiMidity++
+Summary(pl):	Instrumenty dla TiMidity++
 Summary(pt_BR):	Instrumentos básicos para o TiMidity++
 Group:		Applications/Sound
 Requires:	%{name}-gspdir
@@ -130,7 +130,7 @@ Group:		Applications/Sound
 Requires:	%{name} = %{version}
 
 %description motif
-xmmidi -- Motif interface for TiMidity++.
+xmmidi - Motif interface for TiMidity++.
 
 %description motif -l pl
 xmmidi - interfejs do TiMidity++ oparty o bibliotekê Motif.
@@ -154,7 +154,7 @@ Group:		Applications/Sound
 Requires:	%{name} = %{version}
 
 %description tcltk
-tkmidi -- Tcl/Tk interface for TiMidity++.
+tkmidi - Tcl/Tk interface for TiMidity++.
 
 %description tcltk -l pl
 tkmidi - interfejs do TiMidity++ oparty o Tcl/Tk.
@@ -178,7 +178,7 @@ Group:		Applications/Sound
 Requires:	%{name} = %{version}
 
 %description xaw
-xawmidi -- Athena interface for TiMidity++.
+xawmidi - Athena interface for TiMidity++.
 
 %description xaw -l pl
 xawmidi - interfejs do TiMidity++ oparty o biblitekê widgetów Athena.
