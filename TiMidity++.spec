@@ -24,6 +24,8 @@ BuildRequires:	motif-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	slang-devel
 BuildRequires:	tk-devel >= 8.3.2
+BuildRequires:	autoconf
+BuildRequires:	automake
 URL:		http://www.goice.co.jp/member/mo/timidity/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	timidity
@@ -146,7 +148,7 @@ Requires:	%{name}
 instruments for TiMidity++.
 
 %description instruments -l pl
-instrumenty dla TiMidity++
+instrumenty dla TiMidity++.
 
 %prep
 %setup -q
