@@ -1,7 +1,7 @@
 Summary:	TiMidity++ - MIDI to WAV converter and player
 Name:		TiMidity++
-Version:	2.10.1
-Release:	2
+Version:	2.10.2
+Release:	1
 Group:		Applications/Sound
 Group(de):	Applikationen/Laut
 Group(pl):	Aplikacje/D¼wiêk
