@@ -34,12 +34,12 @@ URL:		http://timidity.sourceforge.net/
 BuildRequires:	autoconf
 %{?with_esd:BuildRequires:	esound-devel}
 %{?with_jack:BuildRequires:	jack-audio-connection-kit-devel}
-BuildRequires:	gtk+-devel
-BuildRequires:	motif-devel
+%{?with_X:BuildRequires:	gtk+-devel}
+%{?with_X:BuildRequires:	motif-devel}
 %{?with_nas:BuildRequires:	nas-devel}
 BuildRequires:	ncurses-devel
 BuildRequires:	slang-devel
-BuildRequires:	tk-devel >= 8.3.2
+%{?with_X:BuildRequires:	tk-devel >= 8.3.2}
 %{?with_vorbis:BuildRequires:	libvorbis-devel}
 Obsoletes:	timidity
 Obsoletes:	timidity++
