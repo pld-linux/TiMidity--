@@ -10,8 +10,6 @@ Release:	5
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
-Group(de):	Applikationen/Laut
-Group(pl):	Aplikacje/D¼wiêk
 Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.bz2
 Source1:	http://archive.cs.umbc.edu/pub/midia/instruments.tar.gz
 Source2:	timidity.cfg
@@ -55,8 +53,6 @@ pokazywaæ s³owa zawarte w pliku KAR lub WRD.
 Summary:	Slang interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ oparty o bibliotekê Slang
 Group:		Applications/Sound
-Group(de):	Applikationen/Laut
-Group(pl):	Aplikacje/D¼wiêk
 Requires:	%{name} = %{version}
 
 %description slang
@@ -69,8 +65,6 @@ Interfejs do TiMidity++ oparty o bibliotekê Slang.
 Summary:	Motif interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ oparty o Motif
 Group:		Applications/Sound
-Group(de):	Applikationen/Laut
-Group(pl):	Aplikacje/D¼wiêk
 Requires:	%{name} = %{version}
 
 %description motif
@@ -83,8 +77,6 @@ xmmidi - interfejs do TiMidity++ oparty o bibliotekê Motif.
 Summary:	Tcl/Tk interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ oparty o Tcl/Tk
 Group:		Applications/Sound
-Group(de):	Applikationen/Laut
-Group(pl):	Aplikacje/D¼wiêk
 Requires:	%{name} = %{version}
 
 %description tcltk
@@ -97,8 +89,6 @@ tkmidi - interfejs do TiMidity++ oparty o Tcl/Tk.
 Summary:	Athena interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ oparty o Athena Widgets
 Group:		Applications/Sound
-Group(de):	Applikationen/Laut
-Group(pl):	Aplikacje/D¼wiêk
 Requires:	%{name} = %{version}
 
 %description xaw
@@ -111,8 +101,6 @@ xawmidi - interfejs do TiMidity++ oparty o biblitekê widgetów Athena.
 Summary:	GTK+ interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ oparty o bibliotekê gtk+
 Group:		Applications/Sound
-Group(de):	Applikationen/Laut
-Group(pl):	Aplikacje/D¼wiêk
 Requires:	%{name} = %{version}
 
 %description gtk
@@ -125,8 +113,6 @@ gtkmidi - interfejs do TiMidity++ oparty o bibliotekê gtk+.
 Summary:	VT100 interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ dzia³aj±cy na terminalu VT100
 Group:		Applications/Sound
-Group(de):	Applikationen/Laut
-Group(pl):	Aplikacje/D¼wiêk
 Requires:	%{name} = %{version}
 
 %description vt100
@@ -139,8 +125,6 @@ Interfejs do TiMidity++ mog±cy dzia³aæ na terminalu VT100.
 Summary:	instruments for TiMidity++
 Summary(pl):	instrumenty dla TiMidity++
 Group:		Applications/Sound
-Group(de):	Applikationen/Laut
-Group(pl):	Aplikacje/D¼wiêk
 Requires:	%{name}
 Obsoletes:	timidity-patches
 
