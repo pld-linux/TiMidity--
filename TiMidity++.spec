@@ -2,18 +2,23 @@
 # Conditional build:
 # _without_alsa - without ALSA support
 #
+
+%define		_ver		2.12.0
+%define		_pre		pre1
+
 Summary:	TiMidity++ - MIDI to WAV converter and player
 Summary(pl):	TiMidity++ - konwerter do WAV oraz odtwarzacz plikÛw MIDI
 Summary(pt_BR):	Sintetizador MIDI por software
 Summary(ru):	“œ…«“Ÿ◊¡‘≈Ãÿ MIDI ∆¡ Ãœ◊ … ÀœŒ◊≈“‘œ“ …» ◊ WAV ∆œ“Õ¡‘
 Summary(uk):	“œ«“¡◊¡ﬁ MIDI-∆¡ Ã¶◊ ‘¡ ÀœŒ◊≈“‘œ“ ß» ◊ WAV ∆œ“Õ¡‘
 Name:		TiMidity++
-Version:	2.11.3
+Version:	%{_ver}%{_pre}
 Release:	1
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
-Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.bz2
+#Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.bz2
+Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{_ver}-%{_pre}.tar.bz2
 Source1:	http://archive.cs.umbc.edu/pub/midia/instruments.tar.gz
 Source2:	britepno.pat.bz2
 Source3:	pistol.pat.bz2
@@ -75,53 +80,16 @@ exemplo).
 ˙¡¬≈⁄–≈ﬁ’§ ◊¶ƒÕ¶ŒŒ’ —À¶”‘ÿ ⁄◊’À’ MIDI ⁄¡ “¡»’ŒœÀ ¶Œ‘≈Œ”…◊Œœ«œ
 ◊…Àœ“…”‘¡ŒŒ— –“œ√≈”œ“¡.
 
-%package slang
-Summary:	Slang interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ oparty o bibliotekÍ Slang
+%package gspdir
+Summary:	Directory for TiMidity++ instruments
+Summary(pl):	Katalog na instrumenty TiMidity++
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
 
-%description slang
-Slang interface for TiMidity++.
+%description gspdir
+Directory where TiMidity++ instruments should be placed in.
 
-%description slang -l pl
-Interfejs do TiMidity++ oparty o bibliotekÍ Slang.
-
-%package motif
-Summary:	Motif interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ oparty o Motif
-Group:		Applications/Sound
-Requires:	%{name} = %{version}
-
-%description motif
-xmmidi -- Motif interface for TiMidity++.
-
-%description motif -l pl
-xmmidi - interfejs do TiMidity++ oparty o bibliotekÍ Motif.
-
-%package tcltk
-Summary:	Tcl/Tk interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ oparty o Tcl/Tk
-Group:		Applications/Sound
-Requires:	%{name} = %{version}
-
-%description tcltk
-tkmidi -- Tcl/Tk interface for TiMidity++.
-
-%description tcltk -l pl
-tkmidi - interfejs do TiMidity++ oparty o Tcl/Tk.
-
-%package xaw
-Summary:	Athena interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ oparty o Athena Widgets
-Group:		Applications/Sound
-Requires:	%{name} = %{version}
-
-%description xaw
-xawmidi -- Athena interface for TiMidity++.
-
-%description xaw -l pl
-xawmidi - interfejs do TiMidity++ oparty o biblitekÍ widgetÛw Athena.
+%description gspdir -l pl
+Katalog, w ktÛrym powinny byÊ instalowane instrumenty dla TiMidity++.
 
 %package gtk
 Summary:	GTK+ interface for TiMidity++
@@ -135,24 +103,12 @@ gtkmidi -- GTK+ interface for TiMidity++.
 %description gtk -l pl
 gtkmidi - interfejs do TiMidity++ oparty o bibliotekÍ gtk+.
 
-%package vt100
-Summary:	VT100 interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ dzia≥aj±cy na terminalu VT100
-Group:		Applications/Sound
-Requires:	%{name} = %{version}
-
-%description vt100
-VT100 interface for TiMidity++.
-
-%description vt100 -l pl
-Interfejs do TiMidity++ mog±cy dzia≥aÊ na terminalu VT100.
-
 %package instruments
 Summary:	instruments for TiMidity++
 Summary(pl):	instrumenty dla TiMidity++
 Summary(pt_BR):	Instrumentos b·sicos para o TiMidity++
 Group:		Applications/Sound
-Requires:	%{name}
+Requires:	%{name}-gspdir
 Obsoletes:	timidity-patches
 
 %description instruments
@@ -165,8 +121,68 @@ Instrumenty dla TiMidity++.
 Este pacote inclui um conjunto b·sico de instrumentos (chamados de
 patches no meio musical) para o TiMidity++.
 
+%package motif
+Summary:	Motif interface for TiMidity++
+Summary(pl):	Interfejs TiMidity++ oparty o Motif
+Group:		Applications/Sound
+Requires:	%{name} = %{version}
+
+%description motif
+xmmidi -- Motif interface for TiMidity++.
+
+%description motif -l pl
+xmmidi - interfejs do TiMidity++ oparty o bibliotekÍ Motif.
+
+%package slang
+Summary:	Slang interface for TiMidity++
+Summary(pl):	Interfejs TiMidity++ oparty o bibliotekÍ Slang
+Group:		Applications/Sound
+Requires:	%{name} = %{version}
+
+%description slang
+Slang interface for TiMidity++.
+
+%description slang -l pl
+Interfejs do TiMidity++ oparty o bibliotekÍ Slang.
+
+%package tcltk
+Summary:	Tcl/Tk interface for TiMidity++
+Summary(pl):	Interfejs TiMidity++ oparty o Tcl/Tk
+Group:		Applications/Sound
+Requires:	%{name} = %{version}
+
+%description tcltk
+tkmidi -- Tcl/Tk interface for TiMidity++.
+
+%description tcltk -l pl
+tkmidi - interfejs do TiMidity++ oparty o Tcl/Tk.
+
+%package vt100
+Summary:	VT100 interface for TiMidity++
+Summary(pl):	Interfejs TiMidity++ dzia≥aj±cy na terminalu VT100
+Group:		Applications/Sound
+Requires:	%{name} = %{version}
+
+%description vt100
+VT100 interface for TiMidity++.
+
+%description vt100 -l pl
+Interfejs do TiMidity++ mog±cy dzia≥aÊ na terminalu VT100.
+
+%package xaw
+Summary:	Athena interface for TiMidity++
+Summary(pl):	Interfejs TiMidity++ oparty o Athena Widgets
+Group:		Applications/Sound
+Requires:	%{name} = %{version}
+
+%description xaw
+xawmidi -- Athena interface for TiMidity++.
+
+%description xaw -l pl
+xawmidi - interfejs do TiMidity++ oparty o biblitekÍ widgetÛw Athena.
+
 %prep
-%setup -q
+%setup -q -n %{name}-%{_ver}-%{_pre}
 %patch0 -p1
 
 %build
@@ -220,14 +236,13 @@ bzip2 -cd %{SOURCE2} > britepno.pat
 bzip2 -cd %{SOURCE3} > pistol.pat
 )
 
-gzip -9nf AUTHORS README* ChangeLog* NEWS doc/C/{CHANGES*,FAQ,README*}
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz doc/C/*.gz
+%doc A* Ch* N* R* TO* doc/C/{C*,F*,README.[!tx]*,README.xs*}
+%config(noreplace) %{_sysconfdir}/timidity.cfg
 %attr(755,root,root) %{_bindir}/timidity
 %dir %{_libdir}/timidity
 %attr(755,root,root) %{_libdir}/timidity/interface_n.so
@@ -235,40 +250,43 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/timidity/interface_i.so
 %{_libdir}/timidity/bitmaps
 %{_mandir}/man*/*
-%config(noreplace) %{_sysconfdir}/timidity.cfg
+
+%files gspdir
+%defattr(644,root,root,755)
 %ghost %dir %{_datadir}/GUSpatches
-
-%files slang
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/timidity/interface_s.so
-
-%files motif
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/timidity/interface_m.so
-%attr(755,root,root) %{_bindir}/xmmidi
-
-%files tcltk
-%defattr(644,root,root,755)
-%doc doc/C/README.tk.gz
-%attr(755,root,root) %{_libdir}/timidity/interface_k.so
-%{_libdir}/timidity/*.tcl
-%attr(755,root,root) %{_bindir}/tkmidi
-
-%files xaw
-%defattr(644,root,root,755)
-%doc doc/C/README.xaw.gz
-%attr(755,root,root) %{_libdir}/timidity/interface_a.so
-%attr(755,root,root) %{_bindir}/xawmidi
 
 %files gtk
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/timidity/interface_g.so
 %attr(755,root,root) %{_bindir}/gtkmidi
 
+%files instruments
+%defattr(644,root,root,755)
+%{_datadir}/GUSpatches/*
+
+%files motif
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/timidity/interface_m.so
+%attr(755,root,root) %{_bindir}/xmmidi
+
+%files slang
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/timidity/interface_s.so
+
+%files tcltk
+%defattr(644,root,root,755)
+%doc doc/C/README.tk
+%attr(755,root,root) %{_libdir}/timidity/interface_k.so
+%{_libdir}/timidity/tclIndex
+%{_libdir}/timidity/*.tcl
+%attr(755,root,root) %{_bindir}/tkmidi
+
 %files vt100
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/timidity/interface_T.so
 
-%files instruments
+%files xaw
 %defattr(644,root,root,755)
-%{_datadir}/GUSpatches/*
+%doc doc/C/README.xaw
+%attr(755,root,root) %{_libdir}/timidity/interface_a.so
+%attr(755,root,root) %{_bindir}/xawmidi
