@@ -1,15 +1,14 @@
 Summary:	TiMidity++ - MIDI to WAV converter and player
 Name:		TiMidity++
 Version:	2.10.2
-Release:	1
+Release:	2
+License:	GPL
+Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
 Group(de):	Applikationen/Laut
 Group(pl):	Aplikacje/D¼wiêk
-License:	GPL
-Vendor:		Masanao Izumo <mo@goice.co.jp>
 Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-config.patch
-URL:		http://www.goice.co.jp/member/mo/timidity/
 %ifnarch sparc sparc64
 BuildRequires:	alsa-lib-devel
 %endif
@@ -17,7 +16,8 @@ BuildRequires:	gtk+-devel
 BuildRequires:	motif-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	slang-devel
-BuildRequires:	tcl-devel
+BuildRequires:	tcl-devel >= 8.3.2
+URL:		http://www.goice.co.jp/member/mo/timidity/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
