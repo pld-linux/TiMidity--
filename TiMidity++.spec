@@ -102,7 +102,7 @@ automake
 	--enable-network \
 	--enable-server \
 	--enable-spectrogram
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
