@@ -1,6 +1,6 @@
 #
 # Conditional build:
-# _without_alsa - without ALSA support
+%bcond_without	alsa	# without ALSA support
 #
 Summary:	TiMidity++ - MIDI to WAV converter and player
 Summary(pl):	TiMidity++ - konwerter do WAV oraz odtwarzacz plików MIDI
@@ -27,17 +27,17 @@ Source3:	pistol.pat.bz2
 Source4:	timidity.cfg
 Patch0:		%{name}-config.patch
 URL:		http://www.goice.co.jp/member/mo/timidity/
-%{!?_without_alsa:BuildRequires:	alsa-lib-devel}
+%{?with_alsa:BuildRequires:	alsa-lib-devel}
 BuildRequires:	autoconf
 BuildRequires:	gtk+-devel
 BuildRequires:	motif-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	slang-devel
 BuildRequires:	tk-devel >= 8.3.2
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	timidity
 Obsoletes:	timidity++
 Obsoletes:	timidity++-X11
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 TiMidity++ is a converter that converts some of MIDI files ( formats :
@@ -203,8 +203,8 @@ cp -f /usr/share/automake/config.sub .
 	--enable-network \
 	--enable-server \
 	--enable-spectrogram \
-	--enable-audio=default,oss,%{!?_without_alsa:alsa,}esd \
-	%{!?_without_alsa:--enable-alsaseq} \
+	--enable-audio=default,oss,%{?with_alsa:alsa,}esd \
+	%{?with_alsa:--enable-alsaseq} \
 	--enable-default-output=default
 
 %{__make}
