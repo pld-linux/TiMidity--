@@ -9,7 +9,7 @@ Summary(ru):	Проигрыватель MIDI файлов и конвертор их в WAV формат
 Summary(uk):	Програвач MIDI-файл╕в та конвертор ╖х в WAV формат
 Name:		TiMidity++
 Version:	2.13.0
-Release:	1
+Release:	2
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
@@ -187,10 +187,11 @@ for f in doc/ja_JP.eucJP/README*; do
 done
 
 %build
-cp -f /usr/share/automake/config.sub .
+cp -f /usr/share/automake/config.sub autoconf
 %{__autoconf}
 %configure \
 	--with-elf \
+	--with-module-dir=%{_libdir}/timidity \
 	--enable-dynamic \
 	--enable-ncurses=dynamic \
 	--enable-slang=dynamic \
