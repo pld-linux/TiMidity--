@@ -9,8 +9,6 @@ Group(de):	Applikationen/Laut
 Group(pl):	Aplikacje/D¼wiêk
 Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-config.patch
-BuildRequires:	autoconf
-BuildRequires:	automake
 %ifnarch sparc sparc64
 BuildRequires:	alsa-lib-devel
 %endif
@@ -98,10 +96,6 @@ VT100 interface for TiMidity++.
 %patch0 -p1
 
 %build
-aclocal
-autoheader
-autoconf
-automake -a -c
 %configure \
 	--with-elf \
 %ifnarch sparc sparc64
