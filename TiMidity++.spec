@@ -119,7 +119,7 @@ patches no meio musical) para o TiMidity++.
 
 %package gtk
 Summary:	GTK+ interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ oparty o bibliotekê gtk+
+Summary(pl):	Interfejs TiMidity++ oparty o bibliotekê GTK+
 Group:		Applications/Sound
 Requires:	%{name}(X) = %{version}-%{release}
 
@@ -127,7 +127,7 @@ Requires:	%{name}(X) = %{version}-%{release}
 gtkmidi - GTK+ interface for TiMidity++.
 
 %description gtk -l pl
-gtkmidi - interfejs do TiMidity++ oparty o bibliotekê gtk+.
+gtkmidi - interfejs do TiMidity++ oparty o bibliotekê GTK+.
 
 %package motif
 Summary:	Motif interface for TiMidity++
