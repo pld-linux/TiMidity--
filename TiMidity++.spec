@@ -25,9 +25,7 @@ Source3:	pistol.pat.bz2
 Source4:	timidity.cfg
 Patch0:		%{name}-config.patch
 URL:		http://www.goice.co.jp/member/mo/timidity/
-%ifnarch sparc sparc64
 %{!?_without_alsa:BuildRequires:	alsa-lib-devel}
-%endif
 BuildRequires:	autoconf
 BuildRequires:	gtk+-devel
 BuildRequires:	motif-devel
@@ -202,12 +200,8 @@ xawmidi - interfejs do TiMidity++ oparty o biblitekê widgetów Athena.
 	--enable-network \
 	--enable-server \
 	--enable-spectrogram \
-%ifnarch sparc sparc64
 	--enable-audio=default,oss,%{!?_without_alsa:alsa,}esd \
 	%{!?_without_alsa:--enable-alsaseq} \
-%else
-	--enable-audio=default,oss,esd \
-%endif
 	--enable-default-output=default
 
 %{__make}
