@@ -93,7 +93,9 @@ autoconf
 automake
 %configure \
 	--with-elf \
+%ifnarch sparc sparc64
 	--enable-alsa \
+%endif
 	--enable-dynamic \
 	--enable-ncurses=dynamic \
 	--enable-slang=dynamic \
