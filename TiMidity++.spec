@@ -6,7 +6,7 @@ Summary:	TiMidity++ - MIDI to WAV converter and player
 Summary(pl):	TiMidity++ - konwerter do WAV oraz odtwarzacz plików MIDI
 Name:		TiMidity++
 Version:	2.10.4
-Release:	3
+Release:	4
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
@@ -16,6 +16,8 @@ Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.b
 Source1:	http://archive.cs.umbc.edu/pub/midia/instruments.tar.gz
 Source2:	timidity.cfg
 Patch0:		%{name}-config.patch
+Patch1:		%{name}-amfix.patch
+URL:		http://www.goice.co.jp/member/mo/timidity/
 %ifnarch sparc sparc64
 %{!?_without_alsa:BuildRequires:	alsa-lib-devel}
 %endif
@@ -25,8 +27,6 @@ BuildRequires:	ncurses-devel
 BuildRequires:	slang-devel
 BuildRequires:	tk-devel >= 8.3.2
 BuildRequires:	autoconf
-BuildRequires:	automake
-URL:		http://www.goice.co.jp/member/mo/timidity/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	timidity
 Obsoletes:	timidity++
@@ -145,18 +145,16 @@ Group(pl):	Aplikacje/D¼wiêk
 Requires:	%{name}
 
 %description instruments
-instruments for TiMidity++.
+Instruments for TiMidity++.
 
 %description instruments -l pl
-instrumenty dla TiMidity++.
+Instrumenty dla TiMidity++.
 
 %prep
 %setup -q
 %patch0 -p1
 
 %build
-aclocal
-automake -a -c
 autoconf
 %configure \
 	--with-elf \
@@ -191,15 +189,15 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_datadir}/GUSpatches}
 
 ## based on timidity/timidity.c
 ##ln -s timidity $RPM_BUILD_ROOT%{_bindir}/kmidi # does it work?
-ln -s timidity $RPM_BUILD_ROOT%{_bindir}/gtkmidi
-ln -s timidity $RPM_BUILD_ROOT%{_bindir}/tkmidi
-ln -s timidity $RPM_BUILD_ROOT%{_bindir}/xmmidi
-ln -s timidity $RPM_BUILD_ROOT%{_bindir}/xawmidi
-ln -s timidity $RPM_BUILD_ROOT%{_bindir}/xskinmidi
+ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/gtkmidi
+ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/tkmidi
+ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xmmidi
+ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xawmidi
+ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xskinmidi
 
 install %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}
 
-(cd $RPM_BUILD_ROOT%{_datadir}/GUSpatches ;tar xfvz %{SOURCE1})
+(cd $RPM_BUILD_ROOT%{_datadir}/GUSpatches ; tar xzf %{SOURCE1})
 
 gzip -9nf AUTHORS README* ChangeLog* NEWS doc/C/{CHANGES*,FAQ,README*}
 
