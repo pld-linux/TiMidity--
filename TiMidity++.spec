@@ -196,7 +196,11 @@ ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xskinmidi
 
 install %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}
 
-(cd $RPM_BUILD_ROOT%{_datadir}/GUSpatches ; tar xzf %{SOURCE1})
+(cd $RPM_BUILD_ROOT%{_datadir}/GUSpatches
+tar xzf %{SOURCE1}
+mv -f instruments/* .
+rmdir instruments
+)
 
 gzip -9nf AUTHORS README* ChangeLog* NEWS doc/C/{CHANGES*,FAQ,README*}
 
