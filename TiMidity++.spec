@@ -9,7 +9,9 @@ Vendor:		Masanao Izumo <mo@goice.co.jp>
 Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.bz2
 Patch0:		TiMidity++-config.patch
 URL:		http://www.goice.co.jp/member/mo/timidity/
-BuildRequires:	alsa
+%ifnarch sparc sparc64
+BuildRequires:	alsa-lib-devel
+%endif
 BuildRequires:	slang-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	gtk+-devel
