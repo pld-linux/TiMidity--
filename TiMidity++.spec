@@ -11,7 +11,7 @@ Name:		TiMidity++
 %define		_ver		2.12.0
 %define		_pre		pre1
 Version:	%{_ver}%{_pre}
-Release:	3
+Release:	4
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
@@ -95,7 +95,7 @@ Katalog, w którym powinny byæ instalowane instrumenty dla TiMidity++.
 Summary:	GTK+ interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ oparty o bibliotekê gtk+
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description gtk
 gtkmidi - GTK+ interface for TiMidity++.
@@ -108,7 +108,7 @@ Summary:	Instruments for TiMidity++
 Summary(pl):	Instrumenty dla TiMidity++
 Summary(pt_BR):	Instrumentos básicos para o TiMidity++
 Group:		Applications/Sound
-Requires:	%{name}-gspdir
+Requires:	%{name}-gspdir = %{version}-%{release}
 Obsoletes:	timidity-patches
 
 %description instruments
@@ -125,7 +125,7 @@ patches no meio musical) para o TiMidity++.
 Summary:	Motif interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ oparty o Motif
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description motif
 xmmidi - Motif interface for TiMidity++.
@@ -137,7 +137,7 @@ xmmidi - interfejs do TiMidity++ oparty o bibliotekê Motif.
 Summary:	Slang interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ oparty o bibliotekê Slang
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description slang
 Slang interface for TiMidity++.
@@ -149,7 +149,7 @@ Interfejs do TiMidity++ oparty o bibliotekê Slang.
 Summary:	Tcl/Tk interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ oparty o Tcl/Tk
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description tcltk
 tkmidi - Tcl/Tk interface for TiMidity++.
@@ -161,7 +161,7 @@ tkmidi - interfejs do TiMidity++ oparty o Tcl/Tk.
 Summary:	VT100 interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ dzia³aj±cy na terminalu VT100
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description vt100
 VT100 interface for TiMidity++.
@@ -173,7 +173,7 @@ Interfejs do TiMidity++ mog±cy dzia³aæ na terminalu VT100.
 Summary:	Athena interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ oparty o Athena Widgets
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description xaw
 xawmidi - Athena interface for TiMidity++.
