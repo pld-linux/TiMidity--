@@ -1,10 +1,8 @@
 #
-# TODO:
-#	- xskin bcond (to avoid libX11 deps)
-#
 # Conditional build:
+%bcond_without	X	# without Xaw & xskin (implies libX11 deps)
 %bcond_without	alsa	# without ALSA support
-%bcond_with	arts	# enable ARTS support
+%bcond_with	arts	# enable ARTS support (implies also glib(2) deps)
 %bcond_with	esd	# enable ESD support
 %bcond_with	jack	# enable JACK support
 %bcond_with	nas	# enable NAS support
@@ -190,6 +188,19 @@ xawmidi - Athena interface for TiMidity++.
 %description xaw -l pl
 xawmidi - interfejs do TiMidity++ oparty o biblitekê widgetów Athena.
 
+%package xskin
+Summary:	X skin interface for TiMidity++
+Summary(pl):	Interfejs TiMidity++ "X skin" 
+Group:		Applications/Sound
+Requires:	%{name} = %{version}-%{release}
+Obsoletes:	TiMidity++ < 2.13.0-3
+
+%description xskin
+xskinmidi - X skin interface for TiMidity++.
+
+%description xskin -l pl
+xskinmidi - interfejs do TiMidity++ "X skin"
+
 %prep
 %setup -q
 
@@ -208,20 +219,21 @@ AUDIO=oss%{?with_alsa:,alsa}%{?with_arts:,arts}%{?with_esd:,esd}\
 	%{?with_alsa:--enable-alsaseq=dynamic} \
 	--enable-audio=$AUDIO \
 	--enable-dynamic \
-	--enable-gtk=dynamic \
+	%{?with_X:--enable-gtk=dynamic} \
 	--enable-emacs=dynamic \
-	--enable-motif=dynamic \
+	%{?with_X:--enable-motif=dynamic} \
 	--enable-ncurses=dynamic \
 	--enable-network \
 	--enable-server \
 	--enable-slang=dynamic \
-	--enable-spectrogram \
-	--enable-tcltk=dynamic \
+	%{?with_X:--enable-spectrogram} \
+	%{?with_X:--enable-tcltk=dynamic} \
 	--enable-vt100=dynamic \
-	--enable-xaw=dynamic \
-	--enable-xskin=dynamic \
+	%{?with_X:--enable-xaw=dynamic} \
+	%{?with_X:--enable-xskin=dynamic} \
 	--with-default-path=%{_sysconfdir} \
-	--with-elf
+	--with-elf \
+	%{!?with_X:--without-x}
 
 %{__make}
 
@@ -267,7 +279,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/timidity/interface_n.so
 %{_libdir}/timidity/interface_e.txt
 %{_libdir}/timidity/interface_n.txt
-%{_libdir}/timidity/bitmaps
+# TODO (only tcl iface uses it?)
+%{?with_X:%{_libdir}/timidity/bitmaps}
 %{_mandir}/man1/timidity.1*
 %{_mandir}/man5/timidity.cfg.5*
 %lang(ja) %{_mandir}/ja/man1/timidity.1*
@@ -278,12 +291,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/timidity/interface_A.so
 %{_libdir}/timidity/interface_A.txt
 %endif
-# xskin interface could be separated to, but timidity depends on X anyway
-%doc doc/C/README.xskin
-%lang(ja) %doc doc/ja_JP.eucJP/README.xskin.ja
-%attr(755,root,root) %{_bindir}/xskinmidi
-%attr(755,root,root) %{_libdir}/timidity/interface_i.so
-%{_libdir}/timidity/interface_i.txt
 
 %files gspdir
 %defattr(644,root,root,755)
@@ -293,23 +300,28 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_datadir}/GUSpatches/*
 
+%if %{with X}
 %files gtk
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gtkmidi
 %attr(755,root,root) %{_libdir}/timidity/interface_g.so
 %{_libdir}/timidity/interface_g.txt
+%endif
 
+%if %{with X}
 %files motif
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xmmidi
 %attr(755,root,root) %{_libdir}/timidity/interface_m.so
 %{_libdir}/timidity/interface_m.txt
+%endif
 
 %files slang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/timidity/interface_s.so
 %{_libdir}/timidity/interface_s.txt
 
+%if %{with X}
 %files tcltk
 %defattr(644,root,root,755)
 %doc doc/C/README.tk
@@ -319,12 +331,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/timidity/interface_k.txt
 %{_libdir}/timidity/tclIndex
 %{_libdir}/timidity/*.tcl
+%endif
 
 %files vt100
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/timidity/interface_T.so
 %{_libdir}/timidity/interface_T.txt
 
+%if %{with X}
 %files xaw
 %defattr(644,root,root,755)
 %doc doc/C/README.xaw
@@ -332,3 +346,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xawmidi
 %attr(755,root,root) %{_libdir}/timidity/interface_a.so
 %{_libdir}/timidity/interface_a.txt
+
+%files xskin
+%defattr(644,root,root,755)
+%doc doc/C/README.xskin
+%lang(ja) %doc doc/ja_JP.eucJP/README.xskin.ja
+%attr(755,root,root) %{_bindir}/xskinmidi
+%attr(755,root,root) %{_libdir}/timidity/interface_i.so
+%{_libdir}/timidity/interface_i.txt
+%endif
