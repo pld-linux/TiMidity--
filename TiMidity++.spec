@@ -2,18 +2,16 @@
 # Conditional build:
 # _without_alsa - without ALSA support
 #
-
-%define		_ver		2.12.0
-%define		_pre		pre1
-
 Summary:	TiMidity++ - MIDI to WAV converter and player
 Summary(pl):	TiMidity++ - konwerter do WAV oraz odtwarzacz plikСw MIDI
 Summary(pt_BR):	Sintetizador MIDI por software
 Summary(ru):	Проигрыватель MIDI файлов и конвертор их в WAV формат
 Summary(uk):	Програвач MIDI-файл╕в та конвертор ╖х в WAV формат
 Name:		TiMidity++
+%define		_ver		2.12.0
+%define		_pre		pre1
 Version:	%{_ver}%{_pre}
-Release:	1
+Release:	2
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
