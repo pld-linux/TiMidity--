@@ -4,6 +4,7 @@
 #
 Summary:	TiMidity++ - MIDI to WAV converter and player
 Summary(pl):	TiMidity++ - konwerter do WAV oraz odtwarzacz plików MIDI
+Summary(pt_BR):	Sintetizador MIDI por software.
 Name:		TiMidity++
 Version:	2.11.3
 Release:	1
@@ -50,6 +51,13 @@ TiMidity u¿ywa patchy takich jak Gravis Ultrasound albo Soundfontów
 (sfx, sf2). Cyfrowe dane audio mog± byæ zapisane do pliku albo
 odtwarzane w czasie rzeczywistym. Przy odtwarzaniu TiMidity mo¿e
 pokazywaæ s³owa zawarte w pliku KAR lub WRD.
+
+%description -l pt_BR
+O TiMidity++ é um sintetizador MIDI por software. Este pacote permite
+ouvir arquivos do tipo MIDI com a mesma qualidade de som que as placas
+que utilizam o recurso de "wavetable" via hardware (como a AWE32),
+mesmo que esta não possua o recurso de "wavetable" (a SB16 por
+exemplo).
 
 %package slang
 Summary:	Slang interface for TiMidity++
@@ -126,6 +134,7 @@ Interfejs do TiMidity++ mog±cy dzia³aæ na terminalu VT100.
 %package instruments
 Summary:	instruments for TiMidity++
 Summary(pl):	instrumenty dla TiMidity++
+Summary(pt_BR):	Instrumentos básicos para o TiMidity++
 Group:		Applications/Sound
 Requires:	%{name}
 Obsoletes:	timidity-patches
@@ -135,6 +144,10 @@ Instruments for TiMidity++.
 
 %description instruments -l pl
 Instrumenty dla TiMidity++.
+
+%description instruments -l pt_BR
+Este pacote inclui um conjunto básico de instrumentos (chamados de
+patches no meio musical) para o TiMidity++.
 
 %prep
 %setup -q
@@ -164,7 +177,7 @@ autoconf
 	--enable-audio=default,oss,esd \
 %endif
 	--enable-default-output=default
-	
+
 %{__make}
 
 %install
