@@ -154,7 +154,7 @@ patches no meio musical) para o TiMidity++.
 %patch0 -p1
 
 %build
-autoconf
+%{__autoconf}
 %configure \
 	--with-elf \
 	--enable-dynamic \
