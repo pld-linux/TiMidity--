@@ -1,6 +1,6 @@
 #
 # Conditional build:
-# bcond_off_alsa - without ALSA support
+# _without_alsa - without ALSA support
 #
 Summary:	TiMidity++ - MIDI to WAV converter and player
 Summary(pl):	TiMidity++ - konwerter do WAV oraz odtwarzacz plików MIDI
@@ -15,7 +15,7 @@ Group(pl):	Aplikacje/D¼wiêk
 Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-config.patch
 %ifnarch sparc sparc64
-%{!?bcond_off_alsa:BuildRequires:	alsa-lib-devel}
+%{!?_without_alsa:BuildRequires:	alsa-lib-devel}
 %endif
 BuildRequires:	gtk+-devel
 BuildRequires:	motif-devel
@@ -139,7 +139,7 @@ Interfejs do TiMidity++ mog±cy dzia³aæ na terminalu VT100.
 %configure \
 	--with-elf \
 %ifnarch sparc sparc64
-	%{!?bcond_off_alsa:--enable-alsa} \
+	%{!?_without_alsa:--enable-alsa} \
 %endif
 	--enable-dynamic \
 	--enable-ncurses=dynamic \
