@@ -15,7 +15,7 @@ Summary(ru):	Проигрыватель MIDI файлов и конвертор их в WAV формат
 Summary(uk):	Програвач MIDI-файл╕в та конвертор ╖х в WAV формат
 Name:		TiMidity++
 Version:	2.13.0
-Release:	6
+Release:	7
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
@@ -402,6 +402,7 @@ fi
 
 %if %{with alsa}
 %files alsaseq
+%defattr(644,root,root,755)
 %attr(754,root,root) /etc/rc.d/init.d/timidity
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/timidity
 %endif
