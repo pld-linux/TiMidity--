@@ -1,0 +1,17 @@
+diff -urN TiMidity++-2.0.2.orig/timidity/timidity.h TiMidity++-2.0.2/timidity/timidity.h
+--- TiMidity++-2.0.2.orig/timidity/timidity.h	Fri Mar 19 02:23:28 1999
++++ TiMidity++-2.0.2/timidity/timidity.h	Mon Jul 19 05:55:14 1999
+@@ -29,7 +29,7 @@
+ /* You could specify a complete path, e.g. "/etc/timidity.cfg", and
+    then specify the library directory in the configuration file. */
+ /* #define CONFIG_FILE "/etc/timidity.cfg" */
+-#define CONFIG_FILE DEFAULT_PATH "/timidity.cfg"
++#define CONFIG_FILE "/etc/timidity.cfg"
+ 
+ 
+ /* Filename extension, followed by command to run decompressor so that
+diff -urN TiMidity++-2.0.2.orig/timidity.cfg TiMidity++-2.0.2/timidity.cfg
+--- TiMidity++-2.0.2.orig/timidity.cfg	Thu Jan  1 01:00:00 1970
++++ TiMidity++-2.0.2/timidity.cfg	Mon Jul 19 05:55:58 1999
+@@ -0,0 +1 @@
++dir /usr/share/GUSpatches
