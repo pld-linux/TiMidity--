@@ -26,7 +26,7 @@ to show the lylic contained in KAR file or WRD file.
 %build
 (autoheader/autoconf/automake)
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure %{_target} \
+./configure %{_target_platform} \
 	--prefix=/usr
 make
 
