@@ -10,6 +10,9 @@ Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.b
 Patch0:		TiMidity++-config.patch
 URL:		http://www.goice.co.jp/member/mo/timidity/
 BuildRequires:	alsa
+BuildRequires:	slang-devel
+BuildRequires:	ncurses-devel
+BuildRequires:	gtk-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -158,4 +161,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files vt100
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/timidity/interface_v.so
+%attr(755,root,root) %{_libdir}/timidity/interface_T.so
