@@ -1,7 +1,7 @@
 Summary:	TiMidity++ - MIDI to WAV converter and player
 Name:		TiMidity++
 Version:	2.10.1
-Release:	1
+Release:	2
 Group:		Applications/Sound
 Group(de):	Applikationen/Laut
 Group(pl):	Aplikacje/D¼wiêk
@@ -13,9 +13,11 @@ URL:		http://www.goice.co.jp/member/mo/timidity/
 %ifnarch sparc sparc64
 BuildRequires:	alsa-lib-devel
 %endif
-BuildRequires:	slang-devel
-BuildRequires:	ncurses-devel
 BuildRequires:	gtk+-devel
+BuildRequires:	motif-devel
+BuildRequires:	ncurses-devel
+BuildRequires:	slang-devel
+BuildRequires:	tcl-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
