@@ -1,0 +1,7 @@
+# Customized settings for TiMidity
+
+# Define nice level for TiMidity
+SERVICE_RUN_NICE_LEVEL="+5"
+
+# Extra options for TiMidity
+TIMIDITY_OPTIONS="-B2,8 -q0/0 -k0"

@@ -1,0 +1,58 @@
+#!/bin/sh
+#
+# timidity	TiMidity++ software MIDI synthesizer for ALSA.
+#
+# chkconfig:	2345 89 12
+# description:	TiMidity++ is a software synthesizer. On this mode, TiMidity
+# 		works purely as the software real-time MIDI render, that is as
+# 		a software MIDI synth engine on ALSA.
+#
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+# Get service config
+TIMIDITY_OPTIONS=""
+[ -f /etc/sysconfig/timidity ] && . /etc/sysconfig/timidity
+
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/timidity ]; then
+		msg_starting "TiMidity++ software MIDI synthesizer"
+		modprobe snd_seq 2>/dev/null
+		modprobe snd_seq_oss 2>/dev/null
+                daemon timidity -iAD -Os $TIMIDITY_OPTIONS
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/timidity
+	else
+		msg_already_running "TiMidity++ software MIDI synthesizer"
+	fi
+	;;
+  stop)
+	# Stop daemons.
+	if [ -f /var/lock/subsys/timidity ]; then
+		msg_stopping "TiMidity++ software MIDI synthesizer"
+		killproc timidity
+		rm -f /var/lock/subsys/timidity >/dev/null 2>&1
+	else
+		msg_not_running "TiMidity++ software MIDI synthesizer"
+	fi
+	;;
+  status)
+	status timidity
+	exit $?
+	;;
+  reload|force-reload|restart)
+	$0 stop
+	$0 start
+	RETVAL=$?
+	;;
+  *)
+	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
+	exit 3
+esac
+
+exit $RETVAL
