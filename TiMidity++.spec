@@ -15,7 +15,7 @@ Summary(ru):	Проигрыватель MIDI файлов и конвертор их в WAV формат
 Summary(uk):	Програвач MIDI-файл╕в та конвертор ╖х в WAV формат
 Name:		TiMidity++
 Version:	2.13.0
-Release:	3
+Release:	4
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
@@ -236,14 +236,16 @@ AUDIO=oss%{?with_alsa:,alsa}%{?with_arts:,arts}%{?with_esd:,esd}\
 	--with-elf \
 	%{!?with_X:--without-x}
 
-%{__make}
+%{__make} \
+	SHLIB_DIR=%{_libdir}/timidity
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_datadir}/GUSpatches}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	SHLIB_DIR=%{_libdir}/timidity
 
 ## based on timidity/timidity.c
 ##ln -s timidity $RPM_BUILD_ROOT%{_bindir}/kmidi # does it work?
@@ -280,7 +282,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/timidity/interface_n.so
 %{_libdir}/timidity/interface_e.txt
 %{_libdir}/timidity/interface_n.txt
-%{?with_X:%{_libdir}/timidity/bitmaps}
+%if "%{_lib}" != "lib"
+%dir %{_prefix}/lib/timidity
+%endif
+%{?with_X:%{_prefix}/lib/timidity/bitmaps}
 %{_mandir}/man1/timidity.1*
 %{_mandir}/man5/timidity.cfg.5*
 %lang(ja) %{_mandir}/ja/man1/timidity.1*
@@ -329,8 +334,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/tkmidi
 %attr(755,root,root) %{_libdir}/timidity/interface_k.so
 %{_libdir}/timidity/interface_k.txt
-%{_libdir}/timidity/tclIndex
-%{_libdir}/timidity/*.tcl
+%{_prefix}/lib/timidity/tclIndex
+%{_prefix}/lib/timidity/*.tcl
 %endif
 
 %files vt100
