@@ -1,0 +1,2 @@
+- _without_alsa
+- BuildRequires: tk-devel (removed tcl-devel as tk-devel implies it)
