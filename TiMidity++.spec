@@ -10,7 +10,7 @@ Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.b
 Patch0:		TiMidity++-config.patch
 URL:		http://www.goice.co.jp/member/mo/timidity/
 BuildRequires:	alsa
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 TiMidity++ is a converter that converts some of MIDI files ( formats :
