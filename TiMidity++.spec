@@ -30,12 +30,12 @@ URL:		http://www.goice.co.jp/member/mo/timidity/
 %ifnarch sparc sparc64
 %{!?_without_alsa:BuildRequires:	alsa-lib-devel}
 %endif
+BuildRequires:	autoconf
 BuildRequires:	gtk+-devel
 BuildRequires:	motif-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	slang-devel
 BuildRequires:	tk-devel >= 8.3.2
-BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	timidity
 Obsoletes:	timidity++
@@ -218,7 +218,8 @@ xawmidi - interfejs do TiMidity++ oparty o biblitekê widgetów Athena.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_datadir}/GUSpatches}
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 ## based on timidity/timidity.c
 ##ln -s timidity $RPM_BUILD_ROOT%{_bindir}/kmidi # does it work?
@@ -228,15 +229,14 @@ ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xmmidi
 ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xawmidi
 ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xskinmidi
 
-install %{SOURCE4} $RPM_BUILD_ROOT/%{_sysconfdir}
+install %{SOURCE4} $RPM_BUILD_ROOT%{_sysconfdir}
 
-(cd $RPM_BUILD_ROOT%{_datadir}/GUSpatches
+cd $RPM_BUILD_ROOT%{_datadir}/GUSpatches
 tar xzf %{SOURCE1}
 mv -f instruments/* .
 rmdir instruments
 bzip2 -cd %{SOURCE2} > britepno.pat
 bzip2 -cd %{SOURCE3} > pistol.pat
-)
 
 %clean
 rm -rf $RPM_BUILD_ROOT
