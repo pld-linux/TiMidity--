@@ -247,7 +247,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files gspdir
 %defattr(644,root,root,755)
-%ghost %dir %{_datadir}/GUSpatches
+%dir %{_datadir}/GUSpatches
 
 %files gtk
 %defattr(644,root,root,755)
