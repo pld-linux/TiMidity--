@@ -1,6 +1,14 @@
 #
+# TODO:
+#	- xskin bcond (to avoid libX11 deps)
+#
 # Conditional build:
 %bcond_without	alsa	# without ALSA support
+%bcond_with	arts	# enable ARTS support
+%bcond_with	esd	# enable ESD support
+%bcond_with	jack	# enable JACK support
+%bcond_with	nas	# enable NAS support
+%bcond_with	vorbis	# enable Ogg Vorbis support
 #
 Summary:	TiMidity++ - MIDI to WAV converter and player
 Summary(pl):	TiMidity++ - konwerter do WAV oraz odtwarzacz plikСw MIDI
@@ -9,7 +17,7 @@ Summary(ru):	Проигрыватель MIDI файлов и конвертор их в WAV формат
 Summary(uk):	Програвач MIDI-файл╕в та конвертор ╖х в WAV формат
 Name:		TiMidity++
 Version:	2.13.0
-Release:	2
+Release:	3
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
@@ -22,15 +30,19 @@ Source2:	britepno.pat.bz2
 Source3:	pistol.pat.bz2
 # Source3-md5:	f961325db679de6e0ea402ebe6a268f9
 Source4:	timidity.cfg
-Patch0:		%{name}-config.patch
 URL:		http://timidity.sourceforge.net/
 %{?with_alsa:BuildRequires:	alsa-lib-devel}
+%{?with_arts:BuildRequires:	arts-devel}
 BuildRequires:	autoconf
+%{?with_esd:BuildRequires:	esound-devel}
+%{?with_jack:BuildRequires:	jack-audio-connection-kit-devel}
 BuildRequires:	gtk+-devel
 BuildRequires:	motif-devel
+%{?with_nas:BuildRequires:	nas-devel}
 BuildRequires:	ncurses-devel
 BuildRequires:	slang-devel
 BuildRequires:	tk-devel >= 8.3.2
+%{?with_vorbis:BuildRequires:	libvorbis-devel}
 Obsoletes:	timidity
 Obsoletes:	timidity++
 Obsoletes:	timidity++-X11
@@ -180,7 +192,6 @@ xawmidi - interfejs do TiMidity++ oparty o biblitekЙ widgetСw Athena.
 
 %prep
 %setup -q
-%patch0 -p1
 
 for f in doc/ja_JP.eucJP/README*; do
 	mv -f $f ${f}.ja
@@ -189,25 +200,28 @@ done
 %build
 cp -f /usr/share/automake/config.sub autoconf
 %{__autoconf}
+
+AUDIO=oss%{?with_alsa:,alsa}%{?with_arts:,arts}%{?with_esd:,esd}\
+%{?with_jack:,jack}%{?with_nas:,nas}%{?with_vorbis:,vorbis}
+
 %configure \
-	--with-elf \
-	--with-module-dir=%{_libdir}/timidity \
+	%{?with_alsa:--enable-alsaseq=dynamic} \
+	--enable-audio=$AUDIO \
 	--enable-dynamic \
-	--enable-ncurses=dynamic \
-	--enable-slang=dynamic \
-	--enable-motif=dynamic \
-	--enable-tcltk=dynamic \
-	--enable-emacs=dynamic \
-	--enable-xaw=dynamic \
-	--enable-xskin=dynamic \
 	--enable-gtk=dynamic \
-	--enable-vt100=dynamic \
+	--enable-emacs=dynamic \
+	--enable-motif=dynamic \
+	--enable-ncurses=dynamic \
 	--enable-network \
 	--enable-server \
+	--enable-slang=dynamic \
 	--enable-spectrogram \
-	--enable-audio=default,oss,%{?with_alsa:alsa,}esd \
-	%{?with_alsa:--enable-alsaseq=dynamic} \
-	--enable-default-output=default
+	--enable-tcltk=dynamic \
+	--enable-vt100=dynamic \
+	--enable-xaw=dynamic \
+	--enable-xskin=dynamic \
+	--with-default-path=%{_sysconfdir} \
+	--with-elf
 
 %{__make}
 
