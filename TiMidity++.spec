@@ -16,7 +16,6 @@ Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.b
 Source1:	http://archive.cs.umbc.edu/pub/midia/instruments.tar.gz
 Source2:	timidity.cfg
 Patch0:		%{name}-config.patch
-Patch1:		%{name}-amfix.patch
 URL:		http://www.goice.co.jp/member/mo/timidity/
 %ifnarch sparc sparc64
 %{!?_without_alsa:BuildRequires:	alsa-lib-devel}
