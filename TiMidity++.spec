@@ -15,7 +15,7 @@ Summary(ru):	Проигрыватель MIDI файлов и конвертор их в WAV формат
 Summary(uk):	Програвач MIDI-файл╕в та конвертор ╖х в WAV формат
 Name:		TiMidity++
 Version:	2.13.0
-Release:	5
+Release:	6
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
@@ -28,6 +28,9 @@ Source2:	britepno.pat.bz2
 Source3:	pistol.pat.bz2
 # Source3-md5:	f961325db679de6e0ea402ebe6a268f9
 Source4:	timidity.cfg
+Source5:	timidity.init
+Source6:	timidity.sysconfig
+Patch0:		%{name}-detach.patch
 URL:		http://timidity.sourceforge.net/
 %{?with_alsa:BuildRequires:	alsa-lib-devel}
 %{?with_arts:BuildRequires:	arts-devel}
@@ -202,8 +205,21 @@ xskinmidi - "X Skin" interface for TiMidity++.
 %description xskin -l pl
 xskinmidi - interfejs do TiMidity++ "X Skin".
 
+%package alsaseq
+Summary:	TiMidity++ ALSA sequencer interface
+Summary(pl):	TiMidity++ jako interfejs sekwencera ALSA 
+Group:		Applications/Sound
+Requires:	%{name} = %{version}-%{release}
+
+%description alsaseq
+The ALSA sequencer interface communicates between ALSA sequencer core and
+timidity.  The interface receives events from sequencer and plays it in
+(quasi-)real-time.  On this mode, TiMidity works purely as the software
+real-time MIDI render, that is as a software MIDI synth engine on ALSA.
+
 %prep
 %setup -q
+%patch0 -p1
 
 for f in doc/ja_JP.eucJP/README*; do
 	mv -f $f ${f}.ja
@@ -217,7 +233,7 @@ AUDIO=oss%{?with_alsa:,alsa}%{?with_arts:,arts}%{?with_esd:,esd}\
 %{?with_jack:,jack}%{?with_nas:,nas}%{?with_vorbis:,vorbis}
 
 %configure \
-	%{?with_alsa:--enable-alsaseq=dynamic} \
+	%{?with_alsa:--enable-alsaseq} \
 	--enable-audio=$AUDIO \
 	--enable-dynamic \
 	%{?with_X:--enable-gtk=dynamic} \
@@ -241,7 +257,7 @@ AUDIO=oss%{?with_alsa:,alsa}%{?with_arts:,arts}%{?with_esd:,esd}\
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_datadir}/GUSpatches}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_datadir}/GUSpatches,/etc/{rc.d/init.d,sysconfig}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -268,8 +284,29 @@ rmdir instruments
 bzip2 -cd %{SOURCE2} > britepno.pat
 bzip2 -cd %{SOURCE3} > pistol.pat
 
+install %{SOURCE5} $RPM_BUILD_ROOT/etc/rc.d/init.d/timidity
+install %{SOURCE6} $RPM_BUILD_ROOT/etc/sysconfig/timidity
+
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%if %{with alsa}
+%post alsaseq
+/sbin/chkconfig --add timidity
+if [ -r /var/lock/subsys/timidity ]; then
+	/etc/rc.d/init.d/timidity restart >&2
+else
+	echo "Run \"/etc/rc.d/init.d/timidity start\" to start TiMidity++ ALSA sequencer interface."
+fi
+
+%preun alsaseq
+if [ "$1" = "0" ]; then
+	if [ -r /var/lock/subsys/timidity ]; then
+		/etc/rc.d/init.d/timidity stop >&2
+	fi
+	/sbin/chkconfig --del timidity
+fi
+%endif
 
 %files
 %defattr(644,root,root,755)
@@ -290,12 +327,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man5/timidity.cfg.5*
 %lang(ja) %{_mandir}/ja/man1/timidity.1*
 %lang(ja) %{_mandir}/ja/man5/timidity.cfg.5*
-%if %{with alsa}
-# could be separated, but audio modules are always compiled in,
-# so timidity is linked with alsa-lib anyway
-%attr(755,root,root) %{_libdir}/timidity/interface_A.so
-%{_libdir}/timidity/interface_A.txt
-%endif
 
 %files gspdir
 %defattr(644,root,root,755)
@@ -359,4 +390,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xskinmidi
 %attr(755,root,root) %{_libdir}/timidity/interface_i.so
 %{_libdir}/timidity/interface_i.txt
+%endif
+
+%if %{with alsa}
+%files alsaseq
+%attr(754,root,root) /etc/rc.d/init.d/timidity
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/timidity
 %endif
