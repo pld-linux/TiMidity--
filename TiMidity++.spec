@@ -17,11 +17,13 @@ Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
 #Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.bz2
 Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{_ver}-%{_pre}.tar.bz2
-# Source0-md5: 6a878bc9341812d6a0b9a7a7d38c368c
+# Source0-md5:	6a878bc9341812d6a0b9a7a7d38c368c
 Source1:	http://archive.cs.umbc.edu/pub/midia/instruments.tar.gz
-# Source1-md5: 4959787a78ee39d44a36185bd303cf20
+# Source1-md5:	4959787a78ee39d44a36185bd303cf20
 Source2:	britepno.pat.bz2
+# Source2-md5:	324e265362f812883024b58cf3470d1a
 Source3:	pistol.pat.bz2
+# Source3-md5:	f961325db679de6e0ea402ebe6a268f9
 Source4:	timidity.cfg
 Patch0:		%{name}-config.patch
 URL:		http://www.goice.co.jp/member/mo/timidity/
