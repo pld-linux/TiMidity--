@@ -5,8 +5,8 @@
 Summary:	TiMidity++ - MIDI to WAV converter and player
 Summary(pl):	TiMidity++ - konwerter do WAV oraz odtwarzacz plików MIDI
 Name:		TiMidity++
-Version:	2.10.3a2
-Release:	3
+Version:	2.10.4
+Release:	1
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
@@ -24,6 +24,7 @@ BuildRequires:	slang-devel
 BuildRequires:	tk-devel >= 8.3.2
 URL:		http://www.goice.co.jp/member/mo/timidity/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	timidity
 Obsoletes:	timidity++
 Obsoletes:	timidity++-X11
 
