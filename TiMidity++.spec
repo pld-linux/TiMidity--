@@ -4,7 +4,7 @@
 #
 Summary:	TiMidity++ - MIDI to WAV converter and player
 Summary(pl):	TiMidity++ - konwerter do WAV oraz odtwarzacz plikСw MIDI
-Summary(pt_BR):	Sintetizador MIDI por software.
+Summary(pt_BR):	Sintetizador MIDI por software
 Summary(ru):	Проигрыватель MIDI файлов и конвертор их в WAV формат
 Summary(uk):	Програвач MIDI-файл╕в та конвертор ╖х в WAV формат
 Name:		TiMidity++
