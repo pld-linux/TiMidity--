@@ -11,7 +11,7 @@ Name:		TiMidity++
 %define		_ver		2.12.0
 %define		_pre		pre1
 Version:	%{_ver}%{_pre}
-Release:	2
+Release:	3
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
@@ -186,6 +186,7 @@ xawmidi - interfejs do TiMidity++ oparty o biblitekê widgetów Athena.
 %patch0 -p1
 
 %build
+cp -f /usr/share/automake/config.sub .
 %{__autoconf}
 %configure \
 	--with-elf \
