@@ -4,6 +4,7 @@ Version:	-
 Release:	-
 Group:		-
 Copyright:	GPL
+Vendor:		Masanao Izumo <mo@goice.co.jp>
 Icon:		-
 Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.bz2
 URL:		http://www.goice.co.jp/member/mo/timidity/
