@@ -1,31 +1,46 @@
 #
 # Conditional build:
-# _without_alsa - without ALSA support
+%bcond_without	alsa	# disable ALSA support
+%bcond_with	arts	# enable ARTS support
+%bcond_with	esd	# enable ESD support
+%bcond_with	jack	# enable JACK support
+%bcond_with	nas	# enable NAS support
+%bcond_with	vorbis	# enable Ogg Vorbis support
 #
+
+%define		_pkgname	timidity
+%define		_ver		2.12.1
+%define		_snap		040103
+
 Summary:	TiMidity++ - MIDI to WAV converter and player
 Summary(pl):	TiMidity++ - konwerter do WAV oraz odtwarzacz plikСw MIDI
 Summary(pt_BR):	Sintetizador MIDI por software
 Summary(ru):	Проигрыватель MIDI файлов и конвертор их в WAV формат
 Summary(uk):	Програвач MIDI-файл╕в та конвертор ╖х в WAV формат
 Name:		TiMidity++
-%define		_ver		2.12.0
-%define		_pre		pre1
-Version:	%{_ver}%{_pre}
-Release:	2
+Version:	%{_ver}
+Release:	0.%{_snap}.1
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
 #Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{version}.tar.bz2
-Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{_ver}-%{_pre}.tar.bz2
-# Source0-md5: 6a878bc9341812d6a0b9a7a7d38c368c
-Source1:	http://archive.cs.umbc.edu/pub/midia/instruments.tar.gz
-# Source1-md5: 4959787a78ee39d44a36185bd303cf20
+#Source0:	http://www.goice.co.jp/member/mo/timidity/dist/%{name}-%{_ver}-%{_pre}.tar.bz2
+Source0:	http://www.kernel.pl/~adgor/pld/%{_pkgname}-%{_snap}.tar.bz2
+# Source0-md5:	29695ccdb64247ef48f41cb279f00e76
+Source1:	instruments.tar.gz
+# Source1-md5:	4959787a78ee39d44a36185bd303cf20
 Source2:	britepno.pat.bz2
+# Source2-md5:	324e265362f812883024b58cf3470d1a
 Source3:	pistol.pat.bz2
+# Source3-md5:	f961325db679de6e0ea402ebe6a268f9
 Source4:	timidity.cfg
-Patch0:		%{name}-config.patch
-URL:		http://www.goice.co.jp/member/mo/timidity/
-%{!?_without_alsa:BuildRequires:	alsa-lib-devel}
+URL:		http://timidity.sourceforge.net/
+%{?with_alsa:BuildRequires:	alsa-lib-devel}
+%{?with_arts:BuildRequires:	arts-devel}
+%{?with_esd:BuildRequires:	esound-devel}
+%{?with_jack:BuildRequires:	jack-audio-connection-kit-devel}
+%{?with_nas:BuildRequires:	nas-devel}
+%{?with_vorbis:BuildRequires:	libvorbis-devel}
 BuildRequires:	autoconf
 BuildRequires:	gtk+-devel
 BuildRequires:	motif-devel
@@ -78,17 +93,6 @@ exemplo).
 Забезпечу╓ в╕дм╕нну як╕сть звуку MIDI за рахунок ╕нтенсивного
 використання процесора.
 
-%package gspdir
-Summary:	Directory for TiMidity++ instruments
-Summary(pl):	Katalog na instrumenty TiMidity++
-Group:		Applications/Sound
-
-%description gspdir
-Directory where TiMidity++ instruments should be placed in.
-
-%description gspdir -l pl
-Katalog, w ktСrym powinny byФ instalowane instrumenty dla TiMidity++.
-
 %package gtk
 Summary:	GTK+ interface for TiMidity++
 Summary(pl):	Interfejs TiMidity++ oparty o bibliotekЙ gtk+
@@ -106,7 +110,6 @@ Summary:	Instruments for TiMidity++
 Summary(pl):	Instrumenty dla TiMidity++
 Summary(pt_BR):	Instrumentos bАsicos para o TiMidity++
 Group:		Applications/Sound
-Requires:	%{name}-gspdir
 Obsoletes:	timidity-patches
 
 %description instruments
@@ -180,45 +183,47 @@ xawmidi - Athena interface for TiMidity++.
 xawmidi - interfejs do TiMidity++ oparty o biblitekЙ widgetСw Athena.
 
 %prep
-%setup -q -n %{name}-%{_ver}-%{_pre}
-%patch0 -p1
+%setup -q -n %{_pkgname}-%{_snap}
 
 %build
-%{__autoconf}
+
+AUDIO=oss%{?with_alsa:,alsa}%{?with_arts:,arts}%{?with_esd:,esd}\
+%{?with_jack:,jack}%{?with_nas:,nas}%{?with_vorbis:,vorbis}
+
 %configure \
-	--with-elf \
+	%{?with_alsa:--enable-alsaseq} \
+	--enable-audio=$AUDIO \
 	--enable-dynamic \
-	--enable-ncurses=dynamic \
-	--enable-slang=dynamic \
-	--enable-motif=dynamic \
-	--enable-tcltk=dynamic \
-	--enable-emacs=dynamic \
-	--enable-xaw=dynamic \
-	--enable-xskin=dynamic \
 	--enable-gtk=dynamic \
-	--enable-vt100=dynamic \
+	--enable-emacs=dynamic \
+	--enable-motif=dynamic \
+	--enable-ncurses=dynamic \
 	--enable-network \
 	--enable-server \
+	--enable-slang=dynamic \
 	--enable-spectrogram \
-	--enable-audio=default,oss,%{!?_without_alsa:alsa,}esd \
-	%{!?_without_alsa:--enable-alsaseq} \
-	--enable-default-output=default
+	--enable-tcltk=dynamic \
+	--enable-vt100=dynamic \
+	--enable-xaw=dynamic \
+	--enable-xskin=dynamic \
+	--with-default-path=%{_sysconfdir} \
+	--with-elf
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_datadir}/GUSpatches}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_datadir}/GUSpatches}
+
 ## based on timidity/timidity.c
-##ln -s timidity $RPM_BUILD_ROOT%{_bindir}/kmidi # does it work?
 ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/gtkmidi
 ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/tkmidi
-ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xmmidi
 ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xawmidi
+ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xmmidi
 ln -sf timidity $RPM_BUILD_ROOT%{_bindir}/xskinmidi
 
 install %{SOURCE4} $RPM_BUILD_ROOT%{_sysconfdir}
@@ -244,10 +249,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/timidity/interface_i.so
 %{_libdir}/timidity/bitmaps
 %{_mandir}/man*/*
-
-%files gspdir
-%defattr(644,root,root,755)
-%dir %{_datadir}/GUSpatches
 
 %files gtk
 %defattr(644,root,root,755)
