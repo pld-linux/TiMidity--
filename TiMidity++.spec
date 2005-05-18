@@ -229,6 +229,7 @@ jako silnik syntezatora MIDI w architekturze ALSA.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 for f in doc/ja_JP.eucJP/README*; do
 	mv -f $f ${f}.ja
