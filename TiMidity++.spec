@@ -15,7 +15,7 @@ Summary(ru):	Проигрыватель MIDI файлов и конвертор их в WAV формат
 Summary(uk):	Програвач MIDI-файл╕в та конвертор ╖х в WAV формат
 Name:		TiMidity++
 Version:	2.13.0
-Release:	7
+Release:	7.1
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
@@ -31,6 +31,7 @@ Source4:	timidity.cfg
 Source5:	timidity.init
 Source6:	timidity.sysconfig
 Patch0:		%{name}-detach.patch
+Patch1:		%{name}-gcc4.patch
 URL:		http://timidity.sourceforge.net/
 %{?with_alsa:BuildRequires:	alsa-lib-devel}
 %{?with_arts:BuildRequires:	arts-devel}
