@@ -14,13 +14,13 @@ Summary(pt_BR):	Sintetizador MIDI por software
 Summary(ru):	Проигрыватель MIDI файлов и конвертор их в WAV формат
 Summary(uk):	Програвач MIDI-файл╕в та конвертор ╖х в WAV формат
 Name:		TiMidity++
-Version:	2.13.0
-Release:	7.1
+Version:	2.13.2
+Release:	1
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
 Source0:	http://dl.sourceforge.net/timidity/%{name}-%{version}.tar.bz2
-# Source0-md5:	63284981e1ac81fce2b53cc4b1f4c468
+# Source0-md5:	a82ceeb2245e22f4de2b41da21eaee32
 Source1:	http://archive.cs.umbc.edu/pub/midia/instruments.tar.gz
 # Source1-md5:	4959787a78ee39d44a36185bd303cf20
 Source2:	britepno.pat.bz2
