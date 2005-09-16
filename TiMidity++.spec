@@ -15,7 +15,7 @@ Summary(ru):	Проигрыватель MIDI файлов и конвертор их в WAV формат
 Summary(uk):	Програвач MIDI-файл╕в та конвертор ╖х в WAV формат
 Name:		TiMidity++
 Version:	2.13.2
-Release:	1
+Release:	2
 License:	GPL
 Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
@@ -42,7 +42,7 @@ BuildRequires:	autoconf
 %{?with_X:BuildRequires:	motif-devel}
 %{?with_nas:BuildRequires:	nas-devel}
 BuildRequires:	ncurses-devel
-BuildRequires:	slang-devel
+BuildRequires:	slang-devel >= 2.0.0
 %{?with_X:BuildRequires:	tk-devel >= 8.3.2}
 %{?with_vorbis:BuildRequires:	libvorbis-devel}
 %{?with_X:Provides:	%{name}(X) = %{version}-%{release}}
