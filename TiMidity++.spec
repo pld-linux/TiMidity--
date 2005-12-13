@@ -37,14 +37,14 @@ URL:		http://timidity.sourceforge.net/
 %{?with_arts:BuildRequires:	arts-devel}
 BuildRequires:	autoconf
 %{?with_esd:BuildRequires:	esound-devel}
-%{?with_jack:BuildRequires:	jack-audio-connection-kit-devel}
 %{?with_X:BuildRequires:	gtk+-devel}
+%{?with_jack:BuildRequires:	jack-audio-connection-kit-devel}
+%{?with_vorbis:BuildRequires:	libvorbis-devel}
 %{?with_X:BuildRequires:	motif-devel}
 %{?with_nas:BuildRequires:	nas-devel}
 BuildRequires:	ncurses-devel
 BuildRequires:	slang-devel >= 2.0.0
 %{?with_X:BuildRequires:	tk-devel >= 8.3.2}
-%{?with_vorbis:BuildRequires:	libvorbis-devel}
 %{?with_X:Provides:	%{name}(X) = %{version}-%{release}}
 Obsoletes:	timidity
 Obsoletes:	timidity++
@@ -195,7 +195,7 @@ xawmidi - interfejs do TiMidity++ oparty o biblitekê widgetów Athena.
 
 %package xskin
 Summary:	"X Skin" interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ "X Skin" 
+Summary(pl):	Interfejs TiMidity++ "X Skin"
 Group:		Applications/Sound
 Requires:	%{name}(X) = %{version}-%{release}
 Obsoletes:	TiMidity++ < 2.13.0-3
@@ -323,7 +323,7 @@ fi
 %doc AUTHORS ChangeLog* NEWS README TODO doc/C/{CHANGES*,FAQ,README.[!tx]*}
 %lang(ja) %doc README.ja doc/ja_JP.eucJP/README.[!tx]*.ja
 %attr(755,root,root) %{_bindir}/timidity
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/timidity.cfg
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/timidity.cfg
 %dir %{_libdir}/timidity
 %attr(755,root,root) %{_libdir}/timidity/interface_e.so
 %attr(755,root,root) %{_libdir}/timidity/interface_n.so
@@ -406,5 +406,5 @@ fi
 %files alsaseq
 %defattr(644,root,root,755)
 %attr(754,root,root) /etc/rc.d/init.d/timidity
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/timidity
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/timidity
 %endif
