@@ -17,7 +17,6 @@ Name:		TiMidity++
 Version:	2.13.2
 Release:	2
 License:	GPL
-Vendor:		Masanao Izumo <mo@goice.co.jp>
 Group:		Applications/Sound
 Source0:	http://dl.sourceforge.net/timidity/%{name}-%{version}.tar.bz2
 # Source0-md5:	a82ceeb2245e22f4de2b41da21eaee32
@@ -43,6 +42,7 @@ BuildRequires:	autoconf
 %{?with_X:BuildRequires:	motif-devel}
 %{?with_nas:BuildRequires:	nas-devel}
 BuildRequires:	ncurses-devel
+BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	slang-devel >= 2.0.0
 %{?with_X:BuildRequires:	tk-devel >= 8.3.2}
 %{?with_X:Provides:	%{name}(X) = %{version}-%{release}}
@@ -81,16 +81,15 @@ exemplo).
 %description -l ru
 Проигрыватель MIDI файлов, не требующий поддержки инструментов MIDI
 звуковой платой. Использует файлы инструментов в формате GUS/patch,
-может также использовать данные в формате SoundFont.
-Обеспечивает отличное качество звука MIDI за счет интенсивного
-использования процессора.
+может также использовать данные в формате SoundFont. Обеспечивает
+отличное качество звука MIDI за счет интенсивного использования
+процессора.
 
 %description -l uk
 Програвач MIDI файл╕в, якому не потр╕бна п╕дтримка ╕нструмент╕в MIDI
 звуковою платою. Використову╓ файли ╕нструмент╕в у формат╕ GUS/patch,
-розум╕╓ також формат SoundFont.
-Забезпечу╓ в╕дм╕нну як╕сть звуку MIDI за рахунок ╕нтенсивного
-використання процесора.
+розум╕╓ також формат SoundFont. Забезпечу╓ в╕дм╕нну як╕сть звуку MIDI
+за рахунок ╕нтенсивного використання процесора.
 
 %package gspdir
 Summary:	Directory for TiMidity++ instruments
@@ -300,23 +299,15 @@ install %{SOURCE6} $RPM_BUILD_ROOT/etc/sysconfig/timidity
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%if %{with alsa}
 %post alsaseq
 /sbin/chkconfig --add timidity
-if [ -r /var/lock/subsys/timidity ]; then
-	/etc/rc.d/init.d/timidity restart >&2
-else
-	echo "Run \"/etc/rc.d/init.d/timidity start\" to start TiMidity++ ALSA sequencer interface."
-fi
+%service timidity restart "TiMidity++ ALSA sequencer interface"
 
 %preun alsaseq
 if [ "$1" = "0" ]; then
-	if [ -r /var/lock/subsys/timidity ]; then
-		/etc/rc.d/init.d/timidity stop >&2
-	fi
+	%service timidity stop
 	/sbin/chkconfig --del timidity
 fi
-%endif
 
 %files
 %defattr(644,root,root,755)
