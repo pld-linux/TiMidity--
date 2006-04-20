@@ -209,7 +209,9 @@ xskinmidi - interfejs do TiMidity++ "X Skin".
 Summary:	TiMidity++ ALSA sequencer interface
 Summary(pl):	TiMidity++ jako interfejs sekwencera ALSA
 Group:		Applications/Sound
+Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
+Requires:	rc-scripts
 
 %description alsaseq
 The ALSA sequencer interface communicates between ALSA sequencer core
