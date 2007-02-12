@@ -9,10 +9,10 @@
 %bcond_with	vorbis	# enable Ogg Vorbis support
 #
 Summary:	TiMidity++ - MIDI to WAV converter and player
-Summary(pl):	TiMidity++ - konwerter do WAV oraz odtwarzacz plikСw MIDI
-Summary(pt_BR):	Sintetizador MIDI por software
-Summary(ru):	Проигрыватель MIDI файлов и конвертор их в WAV формат
-Summary(uk):	Програвач MIDI-файл╕в та конвертор ╖х в WAV формат
+Summary(pl.UTF-8):   TiMidity++ - konwerter do WAV oraz odtwarzacz plikцЁw MIDI
+Summary(pt_BR.UTF-8):   Sintetizador MIDI por software
+Summary(ru.UTF-8):   п÷я─п╬п╦пЁя─я▀п╡п╟я┌п╣п╩я▄ MIDI я└п╟п╧п╩п╬п╡ п╦ п╨п╬п╫п╡п╣я─я┌п╬я─ п╦я┘ п╡ WAV я└п╬я─п╪п╟я┌
+Summary(uk.UTF-8):   п÷я─п╬пЁя─п╟п╡п╟я┤ MIDI-я└п╟п╧п╩я√п╡ я┌п╟ п╨п╬п╫п╡п╣я─я┌п╬я─ я≈я┘ п╡ WAV я└п╬я─п╪п╟я┌
 Name:		TiMidity++
 Version:	2.13.2
 Release:	2
@@ -62,50 +62,50 @@ processing, or played in real time through an audio device. In real
 time playing, TiMidity if able to show the lyric contained in KAR file
 or WRD file.
 
-%description -l pl
-TiMidity++ jest konwerterem z niektСrych plikСw MIDI (formaty:
+%description -l pl.UTF-8
+TiMidity++ jest konwerterem z niektцЁrych plikцЁw MIDI (formaty:
 Standard MIDI (MID), Recomposer (RCP, R36, G18, G36), Module (mod)) do
-plikСw audio (np. RIFF WAVE). Do generowania danych z plikСw MIDI
-TiMidity u©ywa patchy takich jak Gravis Ultrasound albo SoundfontСw
-(sfx, sf2). Cyfrowe dane audio mog╠ byФ zapisane do pliku albo
-odtwarzane w czasie rzeczywistym. Przy odtwarzaniu TiMidity mo©e
-pokazywaФ sЁowa zawarte w pliku KAR lub WRD.
+plikцЁw audio (np. RIFF WAVE). Do generowania danych z plikцЁw MIDI
+TiMidity uе╪ywa patchy takich jak Gravis Ultrasound albo SoundfontцЁw
+(sfx, sf2). Cyfrowe dane audio mogд┘ byд┤ zapisane do pliku albo
+odtwarzane w czasie rzeczywistym. Przy odtwarzaniu TiMidity moе╪e
+pokazywaд┤ sе┌owa zawarte w pliku KAR lub WRD.
 
-%description -l pt_BR
-O TiMidity++ И um sintetizador MIDI por software. Este pacote permite
+%description -l pt_BR.UTF-8
+O TiMidity++ ц╘ um sintetizador MIDI por software. Este pacote permite
 ouvir arquivos do tipo MIDI com a mesma qualidade de som que as placas
 que utilizam o recurso de "wavetable" via hardware (como a AWE32),
-mesmo que esta nЦo possua o recurso de "wavetable" (a SB16 por
+mesmo que esta nцёo possua o recurso de "wavetable" (a SB16 por
 exemplo).
 
-%description -l ru
-Проигрыватель MIDI файлов, не требующий поддержки инструментов MIDI
-звуковой платой. Использует файлы инструментов в формате GUS/patch,
-может также использовать данные в формате SoundFont. Обеспечивает
-отличное качество звука MIDI за счет интенсивного использования
-процессора.
+%description -l ru.UTF-8
+п÷я─п╬п╦пЁя─я▀п╡п╟я┌п╣п╩я▄ MIDI я└п╟п╧п╩п╬п╡, п╫п╣ я┌я─п╣п╠я┐я▌я┴п╦п╧ п©п╬п╢п╢п╣я─п╤п╨п╦ п╦п╫я│я┌я─я┐п╪п╣п╫я┌п╬п╡ MIDI
+п╥п╡я┐п╨п╬п╡п╬п╧ п©п╩п╟я┌п╬п╧. п≤я│п©п╬п╩я▄п╥я┐п╣я┌ я└п╟п╧п╩я▀ п╦п╫я│я┌я─я┐п╪п╣п╫я┌п╬п╡ п╡ я└п╬я─п╪п╟я┌п╣ GUS/patch,
+п╪п╬п╤п╣я┌ я┌п╟п╨п╤п╣ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ п╢п╟п╫п╫я▀п╣ п╡ я└п╬я─п╪п╟я┌п╣ SoundFont. п·п╠п╣я│п©п╣я┤п╦п╡п╟п╣я┌
+п╬я┌п╩п╦я┤п╫п╬п╣ п╨п╟я┤п╣я│я┌п╡п╬ п╥п╡я┐п╨п╟ MIDI п╥п╟ я│я┤п╣я┌ п╦п╫я┌п╣п╫я│п╦п╡п╫п╬пЁп╬ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦я▐
+п©я─п╬я├п╣я│я│п╬я─п╟.
 
-%description -l uk
-Програвач MIDI файл╕в, якому не потр╕бна п╕дтримка ╕нструмент╕в MIDI
-звуковою платою. Використову╓ файли ╕нструмент╕в у формат╕ GUS/patch,
-розум╕╓ також формат SoundFont. Забезпечу╓ в╕дм╕нну як╕сть звуку MIDI
-за рахунок ╕нтенсивного використання процесора.
+%description -l uk.UTF-8
+п÷я─п╬пЁя─п╟п╡п╟я┤ MIDI я└п╟п╧п╩я√п╡, я▐п╨п╬п╪я┐ п╫п╣ п©п╬я┌я─я√п╠п╫п╟ п©я√п╢я┌я─п╦п╪п╨п╟ я√п╫я│я┌я─я┐п╪п╣п╫я┌я√п╡ MIDI
+п╥п╡я┐п╨п╬п╡п╬я▌ п©п╩п╟я┌п╬я▌. п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐я■ я└п╟п╧п╩п╦ я√п╫я│я┌я─я┐п╪п╣п╫я┌я√п╡ я┐ я└п╬я─п╪п╟я┌я√ GUS/patch,
+я─п╬п╥я┐п╪я√я■ я┌п╟п╨п╬п╤ я└п╬я─п╪п╟я┌ SoundFont. п≈п╟п╠п╣п╥п©п╣я┤я┐я■ п╡я√п╢п╪я√п╫п╫я┐ я▐п╨я√я│я┌я▄ п╥п╡я┐п╨я┐ MIDI
+п╥п╟ я─п╟я┘я┐п╫п╬п╨ я√п╫я┌п╣п╫я│п╦п╡п╫п╬пЁп╬ п╡п╦п╨п╬я─п╦я│я┌п╟п╫п╫я▐ п©я─п╬я├п╣я│п╬я─п╟.
 
 %package gspdir
 Summary:	Directory for TiMidity++ instruments
-Summary(pl):	Katalog na instrumenty TiMidity++
+Summary(pl.UTF-8):   Katalog na instrumenty TiMidity++
 Group:		Applications/Sound
 
 %description gspdir
 Directory where TiMidity++ instruments should be placed in.
 
-%description gspdir -l pl
-Katalog, w ktСrym powinny byФ instalowane instrumenty dla TiMidity++.
+%description gspdir -l pl.UTF-8
+Katalog, w ktцЁrym powinny byд┤ instalowane instrumenty dla TiMidity++.
 
 %package instruments
 Summary:	Instruments for TiMidity++
-Summary(pl):	Instrumenty dla TiMidity++
-Summary(pt_BR):	Instrumentos bАsicos para o TiMidity++
+Summary(pl.UTF-8):   Instrumenty dla TiMidity++
+Summary(pt_BR.UTF-8):   Instrumentos bц║sicos para o TiMidity++
 Group:		Applications/Sound
 Requires:	%{name}-gspdir = %{version}-%{release}
 Obsoletes:	timidity-patches
@@ -113,88 +113,88 @@ Obsoletes:	timidity-patches
 %description instruments
 Instruments for TiMidity++.
 
-%description instruments -l pl
+%description instruments -l pl.UTF-8
 Instrumenty dla TiMidity++.
 
-%description instruments -l pt_BR
-Este pacote inclui um conjunto bАsico de instrumentos (chamados de
+%description instruments -l pt_BR.UTF-8
+Este pacote inclui um conjunto bц║sico de instrumentos (chamados de
 patches no meio musical) para o TiMidity++.
 
 %package gtk
 Summary:	GTK+ interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ oparty o bibliotekЙ GTK+
+Summary(pl.UTF-8):   Interfejs TiMidity++ oparty o bibliotekд≥ GTK+
 Group:		Applications/Sound
 Requires:	%{name}(X) = %{version}-%{release}
 
 %description gtk
 gtkmidi - GTK+ interface for TiMidity++.
 
-%description gtk -l pl
-gtkmidi - interfejs do TiMidity++ oparty o bibliotekЙ GTK+.
+%description gtk -l pl.UTF-8
+gtkmidi - interfejs do TiMidity++ oparty o bibliotekд≥ GTK+.
 
 %package motif
 Summary:	Motif interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ oparty o Motif
+Summary(pl.UTF-8):   Interfejs TiMidity++ oparty o Motif
 Group:		Applications/Sound
 Requires:	%{name}(X) = %{version}-%{release}
 
 %description motif
 xmmidi - Motif interface for TiMidity++.
 
-%description motif -l pl
-xmmidi - interfejs do TiMidity++ oparty o bibliotekЙ Motif.
+%description motif -l pl.UTF-8
+xmmidi - interfejs do TiMidity++ oparty o bibliotekд≥ Motif.
 
 %package slang
 Summary:	Slang interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ oparty o bibliotekЙ Slang
+Summary(pl.UTF-8):   Interfejs TiMidity++ oparty o bibliotekд≥ Slang
 Group:		Applications/Sound
 Requires:	%{name} = %{version}-%{release}
 
 %description slang
 Slang interface for TiMidity++.
 
-%description slang -l pl
-Interfejs do TiMidity++ oparty o bibliotekЙ Slang.
+%description slang -l pl.UTF-8
+Interfejs do TiMidity++ oparty o bibliotekд≥ Slang.
 
 %package tcltk
 Summary:	Tcl/Tk interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ oparty o Tcl/Tk
+Summary(pl.UTF-8):   Interfejs TiMidity++ oparty o Tcl/Tk
 Group:		Applications/Sound
 Requires:	%{name}(X) = %{version}-%{release}
 
 %description tcltk
 tkmidi - Tcl/Tk interface for TiMidity++.
 
-%description tcltk -l pl
+%description tcltk -l pl.UTF-8
 tkmidi - interfejs do TiMidity++ oparty o Tcl/Tk.
 
 %package vt100
 Summary:	VT100 interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ dziaЁaj╠cy na terminalu VT100
+Summary(pl.UTF-8):   Interfejs TiMidity++ dziaе┌ajд┘cy na terminalu VT100
 Group:		Applications/Sound
 Requires:	%{name} = %{version}-%{release}
 
 %description vt100
 VT100 interface for TiMidity++.
 
-%description vt100 -l pl
-Interfejs do TiMidity++ mog╠cy dziaЁaФ na terminalu VT100.
+%description vt100 -l pl.UTF-8
+Interfejs do TiMidity++ mogд┘cy dziaе┌aд┤ na terminalu VT100.
 
 %package xaw
 Summary:	Athena interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ oparty o Athena Widgets
+Summary(pl.UTF-8):   Interfejs TiMidity++ oparty o Athena Widgets
 Group:		Applications/Sound
 Requires:	%{name}(X) = %{version}-%{release}
 
 %description xaw
 xawmidi - Athena interface for TiMidity++.
 
-%description xaw -l pl
-xawmidi - interfejs do TiMidity++ oparty o biblitekЙ widgetСw Athena.
+%description xaw -l pl.UTF-8
+xawmidi - interfejs do TiMidity++ oparty o biblitekд≥ widgetцЁw Athena.
 
 %package xskin
 Summary:	"X Skin" interface for TiMidity++
-Summary(pl):	Interfejs TiMidity++ "X Skin"
+Summary(pl.UTF-8):   Interfejs TiMidity++ "X Skin"
 Group:		Applications/Sound
 Requires:	%{name}(X) = %{version}-%{release}
 Obsoletes:	TiMidity++ < 2.13.0-3
@@ -202,12 +202,12 @@ Obsoletes:	TiMidity++ < 2.13.0-3
 %description xskin
 xskinmidi - "X Skin" interface for TiMidity++.
 
-%description xskin -l pl
+%description xskin -l pl.UTF-8
 xskinmidi - interfejs do TiMidity++ "X Skin".
 
 %package alsaseq
 Summary:	TiMidity++ ALSA sequencer interface
-Summary(pl):	TiMidity++ jako interfejs sekwencera ALSA
+Summary(pl.UTF-8):   TiMidity++ jako interfejs sekwencera ALSA
 Group:		Applications/Sound
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
@@ -220,11 +220,11 @@ it in (quasi-)real-time. In this mode, TiMidity works purely as the
 software real-time MIDI render, that is as a software MIDI synth
 engine on ALSA.
 
-%description alsaseq -l pl
-Interfejs sekwencera ALSA komunikuje siЙ miЙdzy rdzeniem sekwencera
+%description alsaseq -l pl.UTF-8
+Interfejs sekwencera ALSA komunikuje siд≥ miд≥dzy rdzeniem sekwencera
 ALSA a timidity. Interfejs odbiera zdarzenia od sekwencera od odtwarza
-je w czasie (prawie) rzeczywistym. W tym trybie TiMidity dziaЁa
-wyЁ╠cznie jako programowy odtwarzacz MIDI czasu rzeczywistego, czyli
+je w czasie (prawie) rzeczywistym. W tym trybie TiMidity dziaе┌a
+wyе┌д┘cznie jako programowy odtwarzacz MIDI czasu rzeczywistego, czyli
 jako silnik syntezatora MIDI w architekturze ALSA.
 
 %prep
