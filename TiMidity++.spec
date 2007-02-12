@@ -9,10 +9,10 @@
 %bcond_with	vorbis	# enable Ogg Vorbis support
 #
 Summary:	TiMidity++ - MIDI to WAV converter and player
-Summary(pl.UTF-8):   TiMidity++ - konwerter do WAV oraz odtwarzacz plików MIDI
-Summary(pt_BR.UTF-8):   Sintetizador MIDI por software
-Summary(ru.UTF-8):   Проигрыватель MIDI файлов и конвертор их в WAV формат
-Summary(uk.UTF-8):   Програвач MIDI-файлів та конвертор їх в WAV формат
+Summary(pl.UTF-8):	TiMidity++ - konwerter do WAV oraz odtwarzacz plików MIDI
+Summary(pt_BR.UTF-8):	Sintetizador MIDI por software
+Summary(ru.UTF-8):	Проигрыватель MIDI файлов и конвертор их в WAV формат
+Summary(uk.UTF-8):	Програвач MIDI-файлів та конвертор їх в WAV формат
 Name:		TiMidity++
 Version:	2.13.2
 Release:	2
@@ -93,7 +93,7 @@ exemplo).
 
 %package gspdir
 Summary:	Directory for TiMidity++ instruments
-Summary(pl.UTF-8):   Katalog na instrumenty TiMidity++
+Summary(pl.UTF-8):	Katalog na instrumenty TiMidity++
 Group:		Applications/Sound
 
 %description gspdir
@@ -104,8 +104,8 @@ Katalog, w którym powinny być instalowane instrumenty dla TiMidity++.
 
 %package instruments
 Summary:	Instruments for TiMidity++
-Summary(pl.UTF-8):   Instrumenty dla TiMidity++
-Summary(pt_BR.UTF-8):   Instrumentos básicos para o TiMidity++
+Summary(pl.UTF-8):	Instrumenty dla TiMidity++
+Summary(pt_BR.UTF-8):	Instrumentos básicos para o TiMidity++
 Group:		Applications/Sound
 Requires:	%{name}-gspdir = %{version}-%{release}
 Obsoletes:	timidity-patches
@@ -122,7 +122,7 @@ patches no meio musical) para o TiMidity++.
 
 %package gtk
 Summary:	GTK+ interface for TiMidity++
-Summary(pl.UTF-8):   Interfejs TiMidity++ oparty o bibliotekę GTK+
+Summary(pl.UTF-8):	Interfejs TiMidity++ oparty o bibliotekę GTK+
 Group:		Applications/Sound
 Requires:	%{name}(X) = %{version}-%{release}
 
@@ -134,7 +134,7 @@ gtkmidi - interfejs do TiMidity++ oparty o bibliotekę GTK+.
 
 %package motif
 Summary:	Motif interface for TiMidity++
-Summary(pl.UTF-8):   Interfejs TiMidity++ oparty o Motif
+Summary(pl.UTF-8):	Interfejs TiMidity++ oparty o Motif
 Group:		Applications/Sound
 Requires:	%{name}(X) = %{version}-%{release}
 
@@ -146,7 +146,7 @@ xmmidi - interfejs do TiMidity++ oparty o bibliotekę Motif.
 
 %package slang
 Summary:	Slang interface for TiMidity++
-Summary(pl.UTF-8):   Interfejs TiMidity++ oparty o bibliotekę Slang
+Summary(pl.UTF-8):	Interfejs TiMidity++ oparty o bibliotekę Slang
 Group:		Applications/Sound
 Requires:	%{name} = %{version}-%{release}
 
@@ -158,7 +158,7 @@ Interfejs do TiMidity++ oparty o bibliotekę Slang.
 
 %package tcltk
 Summary:	Tcl/Tk interface for TiMidity++
-Summary(pl.UTF-8):   Interfejs TiMidity++ oparty o Tcl/Tk
+Summary(pl.UTF-8):	Interfejs TiMidity++ oparty o Tcl/Tk
 Group:		Applications/Sound
 Requires:	%{name}(X) = %{version}-%{release}
 
@@ -170,7 +170,7 @@ tkmidi - interfejs do TiMidity++ oparty o Tcl/Tk.
 
 %package vt100
 Summary:	VT100 interface for TiMidity++
-Summary(pl.UTF-8):   Interfejs TiMidity++ działający na terminalu VT100
+Summary(pl.UTF-8):	Interfejs TiMidity++ działający na terminalu VT100
 Group:		Applications/Sound
 Requires:	%{name} = %{version}-%{release}
 
@@ -182,7 +182,7 @@ Interfejs do TiMidity++ mogący działać na terminalu VT100.
 
 %package xaw
 Summary:	Athena interface for TiMidity++
-Summary(pl.UTF-8):   Interfejs TiMidity++ oparty o Athena Widgets
+Summary(pl.UTF-8):	Interfejs TiMidity++ oparty o Athena Widgets
 Group:		Applications/Sound
 Requires:	%{name}(X) = %{version}-%{release}
 
@@ -194,7 +194,7 @@ xawmidi - interfejs do TiMidity++ oparty o biblitekę widgetów Athena.
 
 %package xskin
 Summary:	"X Skin" interface for TiMidity++
-Summary(pl.UTF-8):   Interfejs TiMidity++ "X Skin"
+Summary(pl.UTF-8):	Interfejs TiMidity++ "X Skin"
 Group:		Applications/Sound
 Requires:	%{name}(X) = %{version}-%{release}
 Obsoletes:	TiMidity++ < 2.13.0-3
@@ -207,7 +207,7 @@ xskinmidi - interfejs do TiMidity++ "X Skin".
 
 %package alsaseq
 Summary:	TiMidity++ ALSA sequencer interface
-Summary(pl.UTF-8):   TiMidity++ jako interfejs sekwencera ALSA
+Summary(pl.UTF-8):	TiMidity++ jako interfejs sekwencera ALSA
 Group:		Applications/Sound
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
