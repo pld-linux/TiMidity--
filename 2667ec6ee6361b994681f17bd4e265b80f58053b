@@ -1,0 +1,3 @@
+- fixed %build (automake must be called with -a -c for allow build also in
+  automake 1.4b environment),
+- automake, autoconf added to BuildRequires.
