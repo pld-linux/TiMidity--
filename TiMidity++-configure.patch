@@ -1,0 +1,20 @@
+--- configure.in	2004-10-03 14:39:52.000000000 +0200
++++ configure.in.new	2007-11-12 12:40:35.000000000 +0100
+@@ -137,7 +137,7 @@
+       pkgdatadir='/usr/local/share/timidity'
+    fi
+   ])
+-tmpdefpath="`eval \"echo ${pkgdatadir}\"`"
++tmpdefpath="`eval echo ${pkgdatadir}`"
+ AC_DEFINE_UNQUOTED(DEFAULT_PATH,"$tmpdefpath",place to install patches)
+ AC_DEFINE(PKGDATADIR,DEFAULT_PATH,a compatibility matter. ignore it.)
+ 
+@@ -151,7 +151,7 @@
+       pkglibdir='/usr/local/lib/timidity'
+    fi
+   ])
+-tmplibdir="`eval \"echo ${pkglibdir}\"`"
++tmplibdir="`eval echo ${pkglibdir}`"
+ AC_DEFINE_UNQUOTED(PKGLIBDIR,"$tmplibdir",place to install modules)
+ 
+ 
