@@ -15,7 +15,7 @@ Summary(ru.UTF-8):	Проигрыватель MIDI файлов и конвер�
 Summary(uk.UTF-8):	Програвач MIDI-файлів та конвертор їх в WAV формат
 Name:		TiMidity++
 Version:	2.13.2
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/Sound
 Source0:	http://dl.sourceforge.net/timidity/%{name}-%{version}.tar.bz2
