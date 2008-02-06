@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	X	# without X based interfaces (implies libX11 deps)
+%bcond_without	x	# without X based interfaces (implies libX11 deps)
 %bcond_without	alsa	# without ALSA support
 %bcond_with	arts	# enable ARTS support (implies also glib(2) deps)
 %bcond_with	esd	# enable ESD support
@@ -37,16 +37,16 @@ URL:		http://timidity.sourceforge.net/
 %{?with_arts:BuildRequires:	arts-devel}
 BuildRequires:	autoconf
 %{?with_esd:BuildRequires:	esound-devel}
-%{?with_X:BuildRequires:	gtk+-devel}
+%{?with_x:BuildRequires:	gtk+-devel}
 %{?with_jack:BuildRequires:	jack-audio-connection-kit-devel}
 %{?with_vorbis:BuildRequires:	libvorbis-devel}
-%{?with_X:BuildRequires:	motif-devel}
+%{?with_x:BuildRequires:	motif-devel}
 %{?with_nas:BuildRequires:	nas-devel}
 BuildRequires:	ncurses-devel
 BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	slang-devel >= 2.0.0
-%{?with_X:BuildRequires:	tk-devel >= 8.3.2}
-%{?with_X:Provides:	%{name}(X) = %{version}-%{release}}
+%{?with_x:BuildRequires:	tk-devel >= 8.3.2}
+%{?with_x:Provides:	%{name}(X) = %{version}-%{release}}
 Obsoletes:	timidity
 Obsoletes:	timidity++
 Obsoletes:	timidity++-X11
@@ -249,21 +249,21 @@ AUDIO=oss%{?with_alsa:,alsa}%{?with_arts:,arts}%{?with_esd:,esd}\
 	%{?with_alsa:--enable-alsaseq} \
 	--enable-audio=$AUDIO \
 	--enable-dynamic \
-	%{?with_X:--enable-gtk=dynamic} \
+	%{?with_x:--enable-gtk=dynamic} \
 	--enable-emacs=dynamic \
-	%{?with_X:--enable-motif=dynamic} \
+	%{?with_x:--enable-motif=dynamic} \
 	--enable-ncurses=dynamic \
 	--enable-network \
 	--enable-server \
 	--enable-slang=dynamic \
-	%{?with_X:--enable-spectrogram} \
-	%{?with_X:--enable-tcltk=dynamic} \
+	%{?with_x:--enable-spectrogram} \
+	%{?with_x:--enable-tcltk=dynamic} \
 	--enable-vt100=dynamic \
-	%{?with_X:--enable-xaw=dynamic} \
-	%{?with_X:--enable-xskin=dynamic} \
+	%{?with_x:--enable-xaw=dynamic} \
+	%{?with_x:--enable-xskin=dynamic} \
 	--with-default-path=%{_sysconfdir} \
 	--with-elf \
-	%{!?with_X:--without-x}
+	%{!?with_x:--without-x}
 
 %{__make} \
 	SHLIB_DIR=%{_libdir}/timidity
@@ -327,7 +327,7 @@ fi
 %if "%{_lib}" != "lib"
 %dir %{_prefix}/lib/timidity
 %endif
-%{?with_X:%{_prefix}/lib/timidity/bitmaps}
+%{?with_x:%{_prefix}/lib/timidity/bitmaps}
 %{_mandir}/man1/timidity.1*
 %{_mandir}/man5/timidity.cfg.5*
 %lang(ja) %{_mandir}/ja/man1/timidity.1*
@@ -341,7 +341,7 @@ fi
 %defattr(644,root,root,755)
 %{_datadir}/GUSpatches/*
 
-%if %{with X}
+%if %{with x}
 %files gtk
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gtkmidi
@@ -349,7 +349,7 @@ fi
 %{_libdir}/timidity/interface_g.txt
 %endif
 
-%if %{with X}
+%if %{with x}
 %files motif
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xmmidi
@@ -362,7 +362,7 @@ fi
 %attr(755,root,root) %{_libdir}/timidity/interface_s.so
 %{_libdir}/timidity/interface_s.txt
 
-%if %{with X}
+%if %{with x}
 %files tcltk
 %defattr(644,root,root,755)
 %doc doc/C/README.tk
@@ -379,7 +379,7 @@ fi
 %attr(755,root,root) %{_libdir}/timidity/interface_T.so
 %{_libdir}/timidity/interface_T.txt
 
-%if %{with X}
+%if %{with x}
 %files xaw
 %defattr(644,root,root,755)
 %doc doc/C/README.xaw
