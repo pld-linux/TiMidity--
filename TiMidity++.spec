@@ -15,7 +15,7 @@ Summary(ru.UTF-8):	Проигрыватель MIDI файлов и конвер�
 Summary(uk.UTF-8):	Програвач MIDI-файлів та конвертор їх в WAV формат
 Name:		TiMidity++
 Version:	2.13.2
-Release:	5
+Release:	6
 License:	GPL
 Group:		Applications/Sound
 Source0:	http://dl.sourceforge.net/timidity/%{name}-%{version}.tar.bz2
@@ -32,6 +32,7 @@ Source6:	timidity.sysconfig
 Patch0:		%{name}-detach.patch
 Patch1:		%{name}-gcc4.patch
 Patch2:		%{name}-configure.patch
+Patch3:		%{name}-stop_polling.patch
 URL:		http://timidity.sourceforge.net/
 %{?with_alsa:BuildRequires:	alsa-lib-devel}
 %{?with_arts:BuildRequires:	arts-devel}
@@ -233,6 +234,7 @@ jako silnik syntezatora MIDI w architekturze ALSA.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p0
+%patch3 -p1
 
 for f in doc/ja_JP.eucJP/README*; do
 	mv -f $f ${f}.ja
