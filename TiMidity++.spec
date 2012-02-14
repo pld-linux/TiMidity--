@@ -15,7 +15,7 @@ Summary(ru.UTF-8):	Проигрыватель MIDI файлов и конвер�
 Summary(uk.UTF-8):	Програвач MIDI-файлів та конвертор їх в WAV формат
 Name:		TiMidity++
 Version:	2.13.2
-Release:	6
+Release:	8
 License:	GPL
 Group:		Applications/Sound
 Source0:	http://dl.sourceforge.net/timidity/%{name}-%{version}.tar.bz2
@@ -29,6 +29,8 @@ Source3:	pistol.pat.bz2
 Source4:	timidity.cfg
 Source5:	timidity.init
 Source6:	timidity.sysconfig
+Source7:	timidity-modules-load.conf
+Source8:	timidity.service
 Patch0:		%{name}-detach.patch
 Patch1:		%{name}-gcc4.patch
 Patch2:		%{name}-configure.patch
@@ -44,7 +46,7 @@ BuildRequires:	autoconf
 %{?with_x:BuildRequires:	motif-devel}
 %{?with_nas:BuildRequires:	nas-devel}
 BuildRequires:	ncurses-devel
-BuildRequires:	rpmbuild(macros) >= 1.268
+BuildRequires:	rpmbuild(macros) >= 1.626
 BuildRequires:	slang-devel >= 2.0.0
 %{?with_x:BuildRequires:	tk-devel >= 8.3.2}
 %{?with_x:Provides:	%{name}(X) = %{version}-%{release}}
@@ -214,6 +216,7 @@ Group:		Applications/Sound
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
 Requires:	rc-scripts
+Requires:	systemd-units >= 37-0.10
 
 %description alsaseq
 The ALSA sequencer interface communicates between ALSA sequencer core
@@ -272,7 +275,8 @@ AUDIO=oss%{?with_alsa:,alsa}%{?with_arts:,arts}%{?with_esd:,esd}\
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_datadir}/GUSpatches,/etc/{rc.d/init.d,sysconfig}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_datadir}/GUSpatches,/etc/{rc.d/init.d,sysconfig}} \
+	$RPM_BUILD_ROOT{%{systemdunitdir},/etc/modules-load.d}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -302,18 +306,29 @@ bzip2 -cd %{SOURCE3} > pistol.pat
 install %{SOURCE5} $RPM_BUILD_ROOT/etc/rc.d/init.d/timidity
 install %{SOURCE6} $RPM_BUILD_ROOT/etc/sysconfig/timidity
 
+install %{SOURCE7} $RPM_BUILD_ROOT/etc/modules-load.d/timidity.conf
+install %{SOURCE8} $RPM_BUILD_ROOT%{systemdunitdir}/timidity.service
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post alsaseq
 /sbin/chkconfig --add timidity
 %service timidity restart "TiMidity++ ALSA sequencer interface"
+%systemd_post timidity.service
 
 %preun alsaseq
 if [ "$1" = "0" ]; then
 	%service timidity stop
 	/sbin/chkconfig --del timidity
 fi
+%systemd_preun timidity.service
+
+%postun
+%systemd_reload
+
+%triggerpostun alsaseq -- %{name}-alsaseq < 2.13.2-8
+%systemd_trigger timidity.service
 
 %files
 %defattr(644,root,root,755)
@@ -404,4 +419,6 @@ fi
 %defattr(644,root,root,755)
 %attr(754,root,root) /etc/rc.d/init.d/timidity
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/timidity
+%config(noreplace) %verify(not md5 mtime size) /etc/modules-load.d/timidity.conf
+%{systemdunitdir}/timidity.service
 %endif

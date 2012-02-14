@@ -1,0 +1,10 @@
+[Unit]
+Description=TiMidity++ software MIDI synthesizer
+After=syslog.target
+
+[Service]
+EnvironmentFile=-/etc/sysconfig/timidity
+ExecStart=/usr/bin/timidity -iA -Os $TIMIDITY_OPTIONS
+
+[Install]
+WantedBy=multi-user.target
