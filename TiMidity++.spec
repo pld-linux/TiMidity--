@@ -15,7 +15,7 @@ Summary(ru.UTF-8):	Проигрыватель MIDI файлов и конвер�
 Summary(uk.UTF-8):	Програвач MIDI-файлів та конвертор їх в WAV формат
 Name:		TiMidity++
 Version:	2.13.2
-Release:	8
+Release:	9
 License:	GPL
 Group:		Applications/Sound
 Source0:	http://dl.sourceforge.net/timidity/%{name}-%{version}.tar.bz2
@@ -214,9 +214,10 @@ Summary:	TiMidity++ ALSA sequencer interface
 Summary(pl.UTF-8):	TiMidity++ jako interfejs sekwencera ALSA
 Group:		Applications/Sound
 Requires(post,preun):	/sbin/chkconfig
+Requires(post,preun,postun):	systemd-units >= 38
 Requires:	%{name} = %{version}-%{release}
 Requires:	rc-scripts
-Requires:	systemd-units >= 37-0.10
+Requires:	systemd-units >= 38
 
 %description alsaseq
 The ALSA sequencer interface communicates between ALSA sequencer core
@@ -324,7 +325,7 @@ if [ "$1" = "0" ]; then
 fi
 %systemd_preun timidity.service
 
-%postun
+%postun alsaseq
 %systemd_reload
 
 %triggerpostun alsaseq -- %{name}-alsaseq < 2.13.2-8
