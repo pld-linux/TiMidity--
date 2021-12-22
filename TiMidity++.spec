@@ -2,6 +2,7 @@
 # Conditional build:
 %bcond_without	x	# without X based interfaces (implies libX11 deps)
 %bcond_without	alsa	# without ALSA support
+%bcond_without	ao	# enable ao support
 %bcond_with	arts	# enable ARTS support (implies also glib(2) deps)
 %bcond_with	esd	# enable ESD support
 %bcond_with	jack	# enable JACK support
@@ -14,12 +15,12 @@ Summary(pt_BR.UTF-8):	Sintetizador MIDI por software
 Summary(ru.UTF-8):	Проигрыватель MIDI файлов и конвертор их в WAV формат
 Summary(uk.UTF-8):	Програвач MIDI-файлів та конвертор їх в WAV формат
 Name:		TiMidity++
-Version:	2.13.2
-Release:	12
+Version:	2.15.0
+Release:	1
 License:	GPL
 Group:		Applications/Sound
-Source0:	http://dl.sourceforge.net/timidity/%{name}-%{version}.tar.bz2
-# Source0-md5:	a82ceeb2245e22f4de2b41da21eaee32
+Source0:	http://downloads.sourceforge.net/timidity/%{name}-%{version}.tar.xz
+# Source0-md5:	d85077febda2c85ffe9f9628023c2667
 Source1:	http://archive.cs.umbc.edu/pub/midia/instruments.tar.gz
 # Source1-md5:	4959787a78ee39d44a36185bd303cf20
 Source2:	britepno.pat.bz2
@@ -42,6 +43,7 @@ BuildRequires:	autoconf
 %{?with_esd:BuildRequires:	esound-devel}
 %{?with_x:BuildRequires:	gtk+-devel}
 %{?with_jack:BuildRequires:	jack-audio-connection-kit-devel}
+%{?with_ao:BuildRequires:	libao-devel}
 %{?with_vorbis:BuildRequires:	libvorbis-devel}
 %{?with_x:BuildRequires:	motif-devel}
 %{?with_nas:BuildRequires:	nas-devel}
@@ -235,10 +237,10 @@ jako silnik syntezatora MIDI w architekturze ALSA.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p0
-%patch3 -p1
+#%%patch0 -p1
+#%%patch1 -p1
+#%%patch2 -p0
+#%%patch3 -p1
 
 for f in doc/ja_JP.eucJP/README*; do
 	mv -f $f ${f}.ja
@@ -249,7 +251,7 @@ cp -f /usr/share/automake/config.sub autoconf
 %{__autoconf}
 
 AUDIO=oss%{?with_alsa:,alsa}%{?with_arts:,arts}%{?with_esd:,esd}\
-%{?with_jack:,jack}%{?with_nas:,nas}%{?with_vorbis:,vorbis}
+%{?with_jack:,jack}%{?with_nas:,nas}%{?with_vorbis:,vorbis}%{?with_ao:,ao}
 
 %configure \
 	CPPFLAGS="-DUSE_INTERP_RESULT %{rpmcppflags}" \
@@ -339,14 +341,14 @@ fi
 %attr(755,root,root) %{_bindir}/timidity
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/timidity.cfg
 %dir %{_libdir}/timidity
-%attr(755,root,root) %{_libdir}/timidity/interface_e.so
-%attr(755,root,root) %{_libdir}/timidity/interface_n.so
-%{_libdir}/timidity/interface_e.txt
-%{_libdir}/timidity/interface_n.txt
+%attr(755,root,root) %{_libdir}/timidity/if_emacs.so
+%attr(755,root,root) %{_libdir}/timidity/if_ncurses.so
+#%{_libdir}/timidity/interface_e.txt
+#%{_libdir}/timidity/interface_n.txt
 %if "%{_lib}" != "lib"
 %dir %{_prefix}/lib/timidity
 %endif
-%{?with_x:%{_prefix}/lib/timidity/bitmaps}
+#%{?with_x:%{_prefix}/lib/timidity/bitmaps}
 %{_mandir}/man1/timidity.1*
 %{_mandir}/man5/timidity.cfg.5*
 %lang(ja) %{_mandir}/ja/man1/timidity.1*
@@ -364,22 +366,22 @@ fi
 %files gtk
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gtkmidi
-%attr(755,root,root) %{_libdir}/timidity/interface_g.so
-%{_libdir}/timidity/interface_g.txt
+%attr(755,root,root) %{_libdir}/timidity/if_gtk.so
+#%{_libdir}/timidity/interface_g.txt
 %endif
 
 %if %{with x}
 %files motif
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xmmidi
-%attr(755,root,root) %{_libdir}/timidity/interface_m.so
-%{_libdir}/timidity/interface_m.txt
+%attr(755,root,root) %{_libdir}/timidity/if_motif.so
+#%{_libdir}/timidity/interface_m.txt
 %endif
 
 %files slang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/timidity/interface_s.so
-%{_libdir}/timidity/interface_s.txt
+%attr(755,root,root) %{_libdir}/timidity/if_slang.so
+#%{_libdir}/timidity/interface_s.txt
 
 %if %{with x}
 %files tcltk
@@ -387,16 +389,16 @@ fi
 %doc doc/C/README.tk
 %lang(ja) %doc doc/ja_JP.eucJP/README.tk.ja
 %attr(755,root,root) %{_bindir}/tkmidi
-%attr(755,root,root) %{_libdir}/timidity/interface_k.so
-%{_libdir}/timidity/interface_k.txt
+%attr(755,root,root) %{_libdir}/timidity/if_tcltk.so
+#%{_libdir}/timidity/interface_k.txt
 %{_prefix}/lib/timidity/tclIndex
 %{_prefix}/lib/timidity/*.tcl
 %endif
 
 %files vt100
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/timidity/interface_T.so
-%{_libdir}/timidity/interface_T.txt
+%attr(755,root,root) %{_libdir}/timidity/if_vt100.so
+#%{_libdir}/timidity/interface_T.txt
 
 %if %{with x}
 %files xaw
@@ -404,16 +406,16 @@ fi
 %doc doc/C/README.xaw
 %lang(ja) %doc doc/ja_JP.eucJP/README.xaw.ja
 %attr(755,root,root) %{_bindir}/xawmidi
-%attr(755,root,root) %{_libdir}/timidity/interface_a.so
-%{_libdir}/timidity/interface_a.txt
+#%attr(755,root,root) %{_libdir}/timidity/interface_a.so
+#%{_libdir}/timidity/interface_a.txt
 
 %files xskin
 %defattr(644,root,root,755)
 %doc doc/C/README.xskin
 %lang(ja) %doc doc/ja_JP.eucJP/README.xskin.ja
 %attr(755,root,root) %{_bindir}/xskinmidi
-%attr(755,root,root) %{_libdir}/timidity/interface_i.so
-%{_libdir}/timidity/interface_i.txt
+%attr(755,root,root) %{_libdir}/timidity/if_xskin.so
+#%{_libdir}/timidity/interface_i.txt
 %endif
 
 %if %{with alsa}
