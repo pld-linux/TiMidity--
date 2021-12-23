@@ -1,6 +1,6 @@
---- configure.in	2004-10-03 14:39:52.000000000 +0200
-+++ configure.in.new	2007-11-12 12:40:35.000000000 +0100
-@@ -137,7 +137,7 @@
+--- TiMidity++-2.15.0/configure.in.orig	2021-12-22 21:46:56.871872445 +0100
++++ TiMidity++-2.15.0/configure.in	2021-12-22 21:47:00.128521469 +0100
+@@ -138,7 +138,7 @@ AC_ARG_WITH(default-path,
        pkgdatadir='/usr/local/share/timidity'
     fi
    ])
@@ -9,7 +9,7 @@
  AC_DEFINE_UNQUOTED(DEFAULT_PATH,"$tmpdefpath",place to install patches)
  AC_DEFINE(PKGDATADIR,DEFAULT_PATH,a compatibility matter. ignore it.)
  
-@@ -151,7 +151,7 @@
+@@ -152,7 +152,7 @@ AC_ARG_WITH(module-dir,
        pkglibdir='/usr/local/lib/timidity'
     fi
    ])
@@ -17,4 +17,4 @@
 +tmplibdir="`eval echo ${pkglibdir}`"
  AC_DEFINE_UNQUOTED(PKGLIBDIR,"$tmplibdir",place to install modules)
  
- 
+ AC_ARG_WITH(xaw-resource-prefix,

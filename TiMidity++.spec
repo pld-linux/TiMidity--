@@ -33,9 +33,7 @@ Source6:	timidity.sysconfig
 Source7:	timidity-modules-load.conf
 Source8:	timidity.service
 Patch0:		%{name}-detach.patch
-Patch1:		%{name}-gcc4.patch
 Patch2:		%{name}-configure.patch
-Patch3:		%{name}-stop_polling.patch
 URL:		http://timidity.sourceforge.net/
 %{?with_alsa:BuildRequires:	alsa-lib-devel}
 %{?with_arts:BuildRequires:	arts-devel}
@@ -237,13 +235,11 @@ jako silnik syntezatora MIDI w architekturze ALSA.
 
 %prep
 %setup -q
-#%%patch0 -p1
-#%%patch1 -p1
-#%%patch2 -p0
-#%%patch3 -p1
+%patch0 -p1
+%patch2 -p1
 
 for f in doc/ja_JP.eucJP/README*; do
-	mv -f $f ${f}.ja
+	%{__mv} $f ${f}.ja
 done
 
 %build
@@ -302,7 +298,7 @@ install %{SOURCE4} $RPM_BUILD_ROOT%{_sysconfdir}
 
 cd $RPM_BUILD_ROOT%{_datadir}/GUSpatches
 tar xzf %{SOURCE1}
-mv -f instruments/* .
+%{__mv} instruments/* .
 rmdir instruments
 bzip2 -cd %{SOURCE2} > britepno.pat
 bzip2 -cd %{SOURCE3} > pistol.pat
@@ -343,8 +339,6 @@ fi
 %dir %{_libdir}/timidity
 %attr(755,root,root) %{_libdir}/timidity/if_emacs.so
 %attr(755,root,root) %{_libdir}/timidity/if_ncurses.so
-#%{_libdir}/timidity/interface_e.txt
-#%{_libdir}/timidity/interface_n.txt
 %if "%{_lib}" != "lib"
 %dir %{_prefix}/lib/timidity
 %endif
@@ -367,7 +361,6 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gtkmidi
 %attr(755,root,root) %{_libdir}/timidity/if_gtk.so
-#%{_libdir}/timidity/interface_g.txt
 %endif
 
 %if %{with x}
@@ -375,13 +368,11 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xmmidi
 %attr(755,root,root) %{_libdir}/timidity/if_motif.so
-#%{_libdir}/timidity/interface_m.txt
 %endif
 
 %files slang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/timidity/if_slang.so
-#%{_libdir}/timidity/interface_s.txt
 
 %if %{with x}
 %files tcltk
@@ -390,7 +381,6 @@ fi
 %lang(ja) %doc doc/ja_JP.eucJP/README.tk.ja
 %attr(755,root,root) %{_bindir}/tkmidi
 %attr(755,root,root) %{_libdir}/timidity/if_tcltk.so
-#%{_libdir}/timidity/interface_k.txt
 %{_prefix}/lib/timidity/tclIndex
 %{_prefix}/lib/timidity/*.tcl
 %endif
@@ -398,7 +388,6 @@ fi
 %files vt100
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/timidity/if_vt100.so
-#%{_libdir}/timidity/interface_T.txt
 
 %if %{with x}
 %files xaw
@@ -406,8 +395,7 @@ fi
 %doc doc/C/README.xaw
 %lang(ja) %doc doc/ja_JP.eucJP/README.xaw.ja
 %attr(755,root,root) %{_bindir}/xawmidi
-#%attr(755,root,root) %{_libdir}/timidity/interface_a.so
-#%{_libdir}/timidity/interface_a.txt
+%attr(755,root,root) %{_libdir}/timidity/if_xaw.so
 
 %files xskin
 %defattr(644,root,root,755)
@@ -415,7 +403,6 @@ fi
 %lang(ja) %doc doc/ja_JP.eucJP/README.xskin.ja
 %attr(755,root,root) %{_bindir}/xskinmidi
 %attr(755,root,root) %{_libdir}/timidity/if_xskin.so
-#%{_libdir}/timidity/interface_i.txt
 %endif
 
 %if %{with alsa}

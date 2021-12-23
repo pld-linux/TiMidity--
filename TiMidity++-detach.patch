@@ -1,23 +1,22 @@
-diff -dur TiMidity++-2.13.0.orig/interface/alsaseq_c.c TiMidity++-2.13.0/interface/alsaseq_c.c
---- TiMidity++-2.13.0.orig/interface/alsaseq_c.c	2004-03-04 05:11:50.000000000 +0100
-+++ TiMidity++-2.13.0/interface/alsaseq_c.c	2004-09-15 18:42:41.549524231 +0200
-@@ -402,7 +402,11 @@
- 	if (ctl.flags & CTLF_DAEMONIZE)
+--- TiMidity++-2.15.0/timidity/timidity.c.orig	2018-08-29 01:33:39.000000000 +0200
++++ TiMidity++-2.15.0/timidity/timidity.c	2021-12-22 21:44:01.522822393 +0100
+@@ -5587,7 +5587,11 @@ MAIN_INTERFACE int timidity_post_load_co
+     if (ctl->id_character == 'A' && (ctl->flags & CTLF_DAEMONIZE))
+     {
+ 	int pid = fork();
++	int fd;
+ 	FILE *pidf;
++	for(fd=0;fd<256;fd++)
++		if (isatty(fd))
++			close(fd);
+ 	switch (pid)
  	{
- 		int pid = fork();
-+		int fd;
- 		FILE *pidf;
-+		for(fd=0;fd<256;fd++){
-+			if (isatty(fd)) close(fd);
-+		}
- 		switch (pid)
- 		{
- 			case 0:			// child is the daemon
-@@ -414,6 +418,7 @@
- 					fprintf( pidf, "%d\n", pid );
- 				exit(0);
+ 	    case 0:		// child is the daemon
+@@ -5602,6 +5606,7 @@ MAIN_INTERFACE int timidity_post_load_co
  		}
-+		setsid();
+ 		exit(0);
  	}
++	setsid();
+     }
+ #endif
  
- 	for (;;) {
