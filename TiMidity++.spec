@@ -124,6 +124,19 @@ Instrumenty dla TiMidity++.
 Este pacote inclui um conjunto básico de instrumentos (chamados de
 patches no meio musical) para o TiMidity++.
 
+%package emacs
+Summary:	Emacs interface for TiMidity++
+Summary(pl.UTF-8):	Interfejs TiMidity++ oparty o Emacsa
+Group:		Applications/Sound
+Requires:	%{name} = %{version}-%{release}
+Requires:	emacs
+
+%description emacs
+Emacs interface for TiMidity++.
+
+%description emacs -l pl.UTF-8
+Interfejs TiMidity++ oparty o Emacsa.
+
 %package gtk
 Summary:	GTK+ interface for TiMidity++
 Summary(pl.UTF-8):	Interfejs TiMidity++ oparty o bibliotekę GTK+
@@ -280,7 +293,12 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_datadir}/GUSpatches,/etc/{rc.d/init
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
+	ELISP_DIR=%{_datadir}/emacs/site-lisp \
 	SHLIB_DIR=%{_libdir}/timidity
+
+# missing in install_tk targets
+%{__make} -C interface install.bitmaps \
+	DESTDIR=$RPM_BUILD_ROOT
 
 ## based on timidity/timidity.c
 ##ln -s timidity $RPM_BUILD_ROOT%{_bindir}/kmidi # does it work?
@@ -337,12 +355,7 @@ fi
 %attr(755,root,root) %{_bindir}/timidity
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/timidity.cfg
 %dir %{_libdir}/timidity
-%attr(755,root,root) %{_libdir}/timidity/if_emacs.so
 %attr(755,root,root) %{_libdir}/timidity/if_ncurses.so
-%if "%{_lib}" != "lib"
-%dir %{_prefix}/lib/timidity
-%endif
-#%{?with_x:%{_prefix}/lib/timidity/bitmaps}
 %{_mandir}/man1/timidity.1*
 %{_mandir}/man5/timidity.cfg.5*
 %lang(ja) %{_mandir}/ja/man1/timidity.1*
@@ -355,6 +368,11 @@ fi
 %files instruments
 %defattr(644,root,root,755)
 %{_datadir}/GUSpatches/*
+
+%files emacs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/timidity/if_emacs.so
+%{_datadir}/emacs/site-lisp/timidity.el
 
 %if %{with x}
 %files gtk
@@ -381,8 +399,12 @@ fi
 %lang(ja) %doc doc/ja_JP.eucJP/README.tk.ja
 %attr(755,root,root) %{_bindir}/tkmidi
 %attr(755,root,root) %{_libdir}/timidity/if_tcltk.so
+%if "%{_lib}" != "lib"
+%dir %{_prefix}/lib/timidity
+%endif
 %{_prefix}/lib/timidity/tclIndex
 %{_prefix}/lib/timidity/*.tcl
+%{_prefix}/lib/timidity/bitmaps
 %endif
 
 %files vt100
