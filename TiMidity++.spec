@@ -50,9 +50,9 @@ BuildRequires:	rpmbuild(macros) >= 1.626
 BuildRequires:	slang-devel >= 2.0.0
 %{?with_x:BuildRequires:	tk-devel >= 8.3.2}
 %{?with_x:Provides:	%{name}(X) = %{version}-%{release}}
-Obsoletes:	timidity
-Obsoletes:	timidity++
-Obsoletes:	timidity++-X11
+Obsoletes:	timidity < 2.10.4
+Obsoletes:	timidity++ < 2.10.4
+Obsoletes:	timidity++-X11 < 2.10.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -112,7 +112,7 @@ Summary(pl.UTF-8):	Instrumenty dla TiMidity++
 Summary(pt_BR.UTF-8):	Instrumentos básicos para o TiMidity++
 Group:		Applications/Sound
 Requires:	%{name}-gspdir = %{version}-%{release}
-Obsoletes:	timidity-patches
+Obsoletes:	timidity-patches < 2.10.4
 
 %description instruments
 Instruments for TiMidity++.
@@ -214,7 +214,6 @@ Summary:	"X Skin" interface for TiMidity++
 Summary(pl.UTF-8):	Interfejs TiMidity++ "X Skin"
 Group:		Applications/Sound
 Requires:	%{name}(X) = %{version}-%{release}
-Obsoletes:	TiMidity++ < 2.13.0-3
 
 %description xskin
 xskinmidi - "X Skin" interface for TiMidity++.
@@ -267,8 +266,8 @@ AUDIO=oss%{?with_alsa:,alsa}%{?with_arts:,arts}%{?with_esd:,esd}\
 	%{?with_alsa:--enable-alsaseq} \
 	--enable-audio=$AUDIO \
 	--enable-dynamic \
-	%{?with_x:--enable-gtk=dynamic} \
 	--enable-emacs=dynamic \
+	%{?with_x:--enable-gtk=dynamic} \
 	%{?with_x:--enable-motif=dynamic} \
 	--enable-ncurses=dynamic \
 	--enable-network \
